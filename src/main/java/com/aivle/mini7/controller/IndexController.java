@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @Slf4j
@@ -26,12 +28,12 @@ public class IndexController {
 
 
 //        FastApiClient 를 호출한다.
-        HospitalResponse hospital = fastApiClient.getHospital(request, latitude, longitude);
-        log.info("hospital: {}", hospital);
+        List<HospitalResponse> hospitalList = fastApiClient.getHospital(request, latitude, longitude);
+        log.info("hospital: {}", hospitalList);
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("recommend_hospital");
-        mv.addObject("hospital", hospital);
+        mv.addObject("hospitalList", hospitalList);
 
         return mv;
     }

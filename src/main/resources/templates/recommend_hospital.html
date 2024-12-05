@@ -1,18 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Recommended Hospitals</title>
 </head>
 <body>
-<!--결과 보여주기 typ hospital.hospitalName-->
+<h1>Recommended Hospitals</h1>
 
-<div>병원명 : [[${hospital.hospitalName}]]</div>
-<div>주소 : [[${hospital.address}]]</div>
-<div>응급실구분 : [[${hospital.emergencyMedicalInstitutionType}]]</div>
-<div>전화번호 1 : [[${hospital.phoneNumber1}]]</div>
-<div>전화번호 2 : [[${hospital.phoneNumber3}]]</div>
-<div>예상 이동 시간 : [[${hospital.travelTime}]]</div>
-<div>도착 예정 시간 : [[${hospital.estimatedArrivalTime}]]</div>
+<table border="1">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Hospital Name</th>
+        <th>Address</th>
+        <th>Emergency Type</th>
+        <th>Phone 1</th>
+        <th>Phone 3</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Distance (km)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 병원 목록 반복 -->
+    <tr th:each="hospital, iterStat : ${hospitalList}">
+        <td th:text="${iterStat.index + 1}"></td>
+        <td th:text="${hospital.hospitalName}"></td>
+        <td th:text="${hospital.address}"></td>
+        <td th:text="${hospital.emergencyMedicalInstitutionType}"></td>
+        <td th:text="${hospital.phoneNumber1}"></td>
+        <td th:text="${hospital.phoneNumber3}"></td>
+        <td th:text="${hospital.latitude}"></td>
+        <td th:text="${hospital.longitude}"></td>
+        <td th:text="${hospital.distance} + ' km'"></td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>
