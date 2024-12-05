@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hospital Logs</title>
+</head>
+<body>
+<h1>Hospital Logs</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Input Text</th>
+        <th>Date Time</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Emergency Class</th>
+        <th>Hospital 1</th>
+        <th>Address 1</th>
+        <th>Tel 1</th>
+        <th>Hospital 2</th>
+        <th>Address 2</th>
+        <th>Tel 2</th>
+        <th>Hospital 3</th>
+        <th>Address 3</th>
+        <th>Tel 3</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 데이터 반복 -->
+    <tr th:each="log, iterStat : ${logList.content}">
+        <td th:text="${iterStat.index + 1}"></td>
+        <td th:text="${log.inputText}"></td>
+        <td th:text="${log.datetime}"></td>
+        <td th:text="${log.inputLatitude}"></td>
+        <td th:text="${log.inputLongitude}"></td>
+        <td th:text="${log.emClass}"></td>
+        <td th:text="${log.hospital1}"></td>
+        <td th:text="${log.addr1}"></td>
+        <td th:text="${log.tel1}"></td>
+        <td th:text="${log.hospital2}"></td>
+        <td th:text="${log.addr2}"></td>
+        <td th:text="${log.tel2}"></td>
+        <td th:text="${log.hospital3}"></td>
+        <td th:text="${log.addr3}"></td>
+        <td th:text="${log.tel3}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- 페이지네이션 -->
+<div>
+    <button th:if="${logList.hasPrevious()}"
+            th:href="@{/admin(page=${logList.number - 1})}">Previous</button>
+    <span th:text="${logList.number + 1} + '/' + ${logList.totalPages}"></span>
+    <button th:if="${logList.hasNext()}"
+            th:href="@{/admin(page=${logList.number + 1})}">Next</button>
+</div>
+</body>
+</html>
