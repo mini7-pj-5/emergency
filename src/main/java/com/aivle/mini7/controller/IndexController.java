@@ -2,6 +2,7 @@ package com.aivle.mini7.controller;
 
 import com.aivle.mini7.client.api.FastApiClient;
 import com.aivle.mini7.client.dto.HospitalResponse;
+import com.aivle.mini7.service.LogService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import java.util.List;
 public class IndexController {
 
     private final FastApiClient fastApiClient;
+    private final LogService logService;
 
     @GetMapping("/")
     public String index() {
@@ -30,6 +32,12 @@ public class IndexController {
 //        FastApiClient 를 호출한다.
         List<HospitalResponse> hospitalList = fastApiClient.getHospital(request, latitude, longitude);
         log.info("hospital: {}", hospitalList);
+
+//        emclass는 AI의 api를 고치기 힘들어서 일단 하드코딩으로 마무리한다.
+        if(hospitalList !=null){
+            logService.saveLog(hospitalList, request, latitude, longitude,4);
+        }
+
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("recommend_hospital");

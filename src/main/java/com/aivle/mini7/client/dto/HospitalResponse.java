@@ -12,8 +12,7 @@ public class HospitalResponse {
     private String emergencyMedicalInstitutionType;
     private String phoneNumber1;
     private String phoneNumber3;
-    private double latitude;
-    private double longitude;
+    private String request;
     private double distance;
 
 }

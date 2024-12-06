@@ -15,8 +15,6 @@
         <th>Emergency Type</th>
         <th>Phone 1</th>
         <th>Phone 3</th>
-        <th>Latitude</th>
-        <th>Longitude</th>
         <th>Distance (km)</th>
     </tr>
     </thead>
@@ -29,8 +27,6 @@
         <td th:text="${hospital.emergencyMedicalInstitutionType}"></td>
         <td th:text="${hospital.phoneNumber1}"></td>
         <td th:text="${hospital.phoneNumber3}"></td>
-        <td th:text="${hospital.latitude}"></td>
-        <td th:text="${hospital.longitude}"></td>
         <td th:text="${hospital.distance} + ' km'"></td>
     </tr>
     </tbody>
