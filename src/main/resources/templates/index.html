@@ -34,6 +34,7 @@
         .logo {
             font-size: 18px;
             font-weight: bold;
+            margin-left: 20px; /* 두 칸 띄우기 */
         }
         .nav-buttons {
             display: flex;
@@ -57,6 +58,7 @@
             padding: 8px 12px;
             border: 1px solid white;
             border-radius: 4px;
+            margin-right: 20px; /* 두 칸 띄우기 */
         }
         .form-container {
             background: rgba(255, 255, 255, 0.9);
@@ -109,23 +111,29 @@
 <body>
 
 <header>
-    <div class="logo">Aivle School 7기</div>
+    <div class="logo">  Aivle School 7기</div>
     <div class="nav-buttons">
         <a href="https://mini7-spring-a061058-d9anczfpctebd8ca.koreacentral-01.azurewebsites.net/">Home</a>
         <a href="#about">About</a>
         <a href="#services">Services</a>
     </div>
-    <a href="https://mini7-spring-a061058-d9anczfpctebd8ca.koreacentral-01.azurewebsites.net/admin" class="admin-button">ADMIN</a>
+    <a href="https://mini7-spring-a061058-d9anczfpctebd8ca.koreacentral-01.azurewebsites.net/admin" class="admin-button">ADMIN  </a>
 </header>
 
 <div class="form-container">
     <h1>응급상황과 위치를 넣으세요.</h1>
     <p>Request your emergency situation and location details.</p>
     <form action="/recommend_hospital" method="application/x-www-form-urlencoded">
-        <textarea name="request" rows="4" placeholder="Requests">교통사고가 났어요. 머리에 피가 많이나고 있습니다. 숨을 쉬지 않아요.</textarea>
+        <label>
+            <textarea name="request" rows="4" placeholder="Requests">교통사고가 났어요. 머리에 피가 많이나고 있습니다. 숨을 쉬지 않아요.</textarea>
+        </label>
         <div style="display: flex; gap: 10px;">
-            <input type="text" name="latitude" value="37.538435245262626" placeholder="Latitude">
-            <input type="text" name="longitude" value="126.98982802695484" placeholder="Longitude">
+            <label>
+                <input type="text" name="latitude" value="37.538435245262626" placeholder="Latitude">
+            </label>
+            <label>
+                <input type="text" name="longitude" value="126.98982802695484" placeholder="Longitude">
+            </label>
         </div>
         <input type="submit" value="Submit">
     </form>
