@@ -14,6 +14,8 @@ public class HospitalResponse {
     private String phoneNumber3;
     private String request;
     private double distance;
+    private double latitude;
+    private double longitude;
 
 }
 
