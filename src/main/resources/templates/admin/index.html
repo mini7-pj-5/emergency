@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator Privileges</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #2f2f2f;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            padding: 10px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar .logo {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 0px;
+            padding: 10px 0;
+            background-color: #1e1e1e;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px 20px;
+            border-bottom: 1px solid #2f2f2f;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar ul li img {
+            width: 20px; /* Adjust the size of the image */
+            height: 20px;
+            margin-right: 10px; /* Space between the image and the text */
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            display: block;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #454545;
+        }
+
+        .sidebar ul li.active {
+            background-color: #007bff;
+        }
+
+        .sidebar ul li.active a {
+            color: #ffffff;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .header-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #615f61;
+            color: #ffffff;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .header-box .company-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .header-box .logout-btn {
+            background-color: #ffffff;
+            color: #0a0a0a;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .header-box .logout-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container input {
+            flex-grow: 1;
+            border: none;
+            font-size: 14px;
+            outline: none;
+            padding: 5px;
+        }
+
+        .search-container button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .search-container button img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo">㈜mini7_team5</div>
+    <ul>
+        <li class="active"><img src="https://cdn-user-icons.flaticon.com/180360/180360103/1734974206026.svg?token=exp=1734975108~hmac=b0af97135e468179b62636508957e076" alt="Dashboard"> <a href="#"> 대시보드</a></li>
+        <li><img src="https://cdn-user-icons.flaticon.com/180360/180360103/1734974104251.svg?token=exp=1734975008~hmac=0ad78b824490dc69f4f99512890fe41c" alt="Design Mode"> <a href="#"> 디자인모드</a></li>
+        <li><img src="https://cdn-user-icons.flaticon.com/180360/180360103/1734974282225.svg?token=exp=1734975184~hmac=d685fd13b84a937e12d5a1ab136d863d" alt="User Management"> <a href="#"> 사용자 관리</a></li>
+        <li><img src="https://cdn-user-icons.flaticon.com/180360/180360103/1734974334342.svg?token=exp=1734975236~hmac=2a03226e16ea915f02bd00669e061530" alt="Shopping"> <a href="#"> 쇼핑</a></li>
+        <li><img src="https://cdn-user-icons.flaticon.com/180360/180360103/1734974406390.svg?token=exp=1734975308~hmac=87070203edc61c0dbaf8244a0eb1c9cc" alt="Reservation"> <a href="#"> 예약</a></li>
+        <li><img src="https://cdn-user-icons.flaticon.com/180360/180360103/1734974701074.svg?token=exp=1734975603~hmac=92932cc079bb3a1d21989a5819177d1d" alt="Content Management"> <a href="#"> 컨텐츠 관리</a></li>
+        <li><img src="https://cdn-user-icons.flaticon.com/180360/180360103/1734974584050.svg?token=exp=1734975485~hmac=aeb4041d976e8f4c11c1d21fea32ea53" alt="Statistics"> <a href="#"> 통계</a></li>
+        <li><img src="https://cdn-user-icons.flaticon.com/180360/180360103/1734974491017.svg?token=exp=1734975393~hmac=57acaa741759933983f2b7143b3aed4e" alt="Settings"> <a href="#"> 환경설정</a></li>
+    </ul>
+</div>
+<div class="main-content">
+    <div class="header-box">
+        <div class="company-name">mini7_team5</div>
+        <button class="logout-btn" onclick="location.href='/logout'">로그아웃</button>
+    </div>
+
+    <h1>Hospital Logs</h1>
+
+    <!-- 조회된 건수 (총 건수) 표시 추가 -->
+    <div>
+        <p><span th:text="${logList.content.size()}">0</span> /<span th:text="${logList.totalElements}"> 0</span> 건</p>
+    </div>
+
+    <table border="1">
+        <thead>
+        <!-- 검색창 포함된 병합된 헤더 -->
+        <tr>
+            <th colspan="15">
+                <div class="search-container">
+
+                    <input type="text" placeholder=" 검색" id="search-input">
+                    <button onclick="searchLogs()">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgl8493ezGhFTss4OaPLwZptcB_bygSybbKw&s" alt="Search Icon">
+                    </button>
+                </div>
+            </th>
+        </tr>
+        <!-- 기존 헤더 -->
+        <tr>
+            <th>#</th>
+            <th>Input Text</th>
+            <th>Date Time</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Emergency Class</th>
+            <th>Hospital 1</th>
+            <th>Address 1</th>
+            <th>Tel 1</th>
+            <th>Hospital 2</th>
+            <th>Address 2</th>
+            <th>Tel 2</th>
+            <th>Hospital 3</th>
+            <th>Address 3</th>
+            <th>Tel 3</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- 데이터 반복 -->
+        <tr th:each="log, iterStat : ${logList.content}">
+            <td th:text="${iterStat.index + 1}"></td>
+            <td th:text="${log.inputText}"></td>
+            <td th:text="${log.datetime}"></td>
+            <td th:text="${log.inputLatitude}"></td>
+            <td th:text="${log.inputLongitude}"></td>
+            <td th:text="${log.emClass}"></td>
+            <td th:text="${log.hospital1}"></td>
+            <td th:text="${log.addr1}"></td>
+            <td th:text="${log.tel1}"></td>
+            <td th:text="${log.hospital2}"></td>
+            <td th:text="${log.addr2}"></td>
+            <td th:text="${log.tel2}"></td>
+            <td th:text="${log.hospital3}"></td>
+            <td th:text="${log.addr3}"></td>
+            <td th:text="${log.tel3}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- 페이지네이션 -->
+    <div>
+        <button th:if="${logList.hasPrevious()}"
+                th:href="@{/admin(page=${logList.number - 1})}">Previous</button>
+        <span th:text="${logList.number + 1} + '/' + ${logList.totalPages}"></span>
+        <button th:if="${logList.hasNext()}"
+                th:href="@{/admin(page=${logList.number + 1})}">Next</button>
+    </div>
+</div>
+
+<script>
+    function searchLogs() {
+        const input = document.getElementById("search-input").value.toLowerCase();
+        const rows = document.querySelectorAll("table tbody tr");
+
+        rows.forEach(row => {
+            const cells = row.querySelectorAll("td");
+            const match = Array.from(cells).some(cell =>
+                cell.textContent.toLowerCase().includes(input)
+            );
+            row.style.display = match ? "" : "none";
+        });
+    }
+</script>
+</body>
+</html>

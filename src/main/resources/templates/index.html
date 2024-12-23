@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://mblogthumb-phinf.pstatic.net/MjAxODEyMDZfMTQz/MDAxNTQ0MTA2Nzk5MTA3.KWoAo5UtOyaANPdoEdc419sMt7YYQj19Zu9zfGGioawg.FEJ5OBjo4t0uuy3vrRxSMPwPqGlfng1wzxBLiBCXXkwg.PNG.jungsh08033/image_8357606361544106773358.png?type=w800');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 45px;
+        }
+        .nav-buttons a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        .nav-buttons a:hover {
+            color: lightgray;
+        }
+        .admin-button {
+            background-color: red;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 350px;
+            text-align: center;
+            margin-top: 100px;
+        }
+        .form-container h1 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .form-container p {
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .form-container textarea,
+        .form-container input[type="text"] {
+            width: calc(50% - 5px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .form-container textarea {
+            width: 100%;
+            resize: none;
+        }
+        .form-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        .form-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">Aivle School 7기</div>
+    <div class="nav-buttons">
+        <a href="/">Home</a>
+        <a href="/board">Board</a>
+        <a href="/qna">Q&A</a>
+    </div>
+    <a href="/admin" class="admin-button">ADMIN</a>
+</header>
+
+<div class="form-container">
+    <h1>응급상황과 위치를 입력하세요</h1>
+    <form action="/recommend_hospital" method="get">
+        <textarea name="request" rows="4" placeholder="응급 상황을 입력하세요"></textarea>
+        <div style="display: flex; gap: 10px;">
+            <input type="text" name="latitude" placeholder="위도">
+            <input type="text" name="longitude" placeholder="경도">
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+</body>
+</html>
