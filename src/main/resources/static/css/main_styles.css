@@ -2,14 +2,34 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-image: url('https://mblogthumb-phinf.pstatic.net/MjAxODEyMDZfMTQz/MDAxNTQ0MTA2Nzk5MTA3.KWoAo5UtOyaANPdoEdc419sMt7YYQj19Zu9zfGGioawg.FEJ5OBjo4t0uuy3vrRxSMPwPqGlfng1wzxBLiBCXXkwg.PNG.jungsh08033/image_8357606361544106773358.png?type=w800');
+    background-image: url('https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQu6WzizP3eGwU1c3EMf-FfvOuBXk9nDIVO0DLyQiDVvLeRmAA_');
     background-size: cover;
     background-position: center;
-    height: 100vh;
+    min-height: 100vh; /* 전체 화면 높이 설정 */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+    flex-direction: column; /* 세로 정렬 */
+    justify-content: flex-start; /* 위쪽에서 시작 */
+    align-items: center; /* 가운데 정렬 */
+    padding: 100px 20px; /* 위쪽 100px, 아래쪽 20px 여백 */
+    box-sizing: border-box;
+    position: relative; /* 아래 패딩 여백 유지 */
+}
+
+body::before {
+    content: '';
+    position: fixed; /* fixed로 설정하여 스크롤에도 고정 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* 화면 전체에 적용 */
+    background: rgba(0, 0, 0, 0.5); /* 어두운 레이어 */
+    z-index: 1; /* 텍스트 아래에 레이어를 위치 */
+    pointer-events: none; /* 클릭이 레이어에 막히지 않도록 설정 */
+}
+
+body * {
+    position: relative; /* 텍스트를 가상 요소 위로 올림 */
+    z-index: 2;
 }
 
 /* 헤더 스타일 */
@@ -17,12 +37,13 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
+    height: 50px; /* 고정된 높이 */
     background: rgba(0, 0, 0, 0.8);
     color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 15px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 1000;
 }
@@ -30,55 +51,75 @@ header {
 .logo {
     font-size: 20px;
     font-weight: bold;
+    margin-left: 20px;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
 }
 
 .nav-buttons {
     display: flex;
     gap: 20px;
+    justify-content: center; /* 버튼을 가운데로 정렬 */
+    flex-grow: 1; /* nav-buttons가 남은 공간을 차지하도록 설정 */
+    margin-right: 60px; /* 왼쪽으로 더 이동 */
+    overflow: hidden; /* 메뉴가 넘칠 경우 숨김 */
 }
 
 .nav-buttons a {
     color: white;
     text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s;
+    font-size: 17px;
+    padding: 8px 12px;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: normal;
 }
 
-.nav-buttons a:hover {
-    color: lightgray;
+.nav-buttons a:hover,
+.nav-buttons a.active {
+    font-weight: bold;
+}
+
+/* 메뉴 버튼 */
+.menu-icon {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .admin-button {
+    margin-right: 20px;
     background-color: red;
     color: white;
     text-decoration: none;
     font-size: 14px;
     padding: 8px 12px;
-    border: 1px solid white;
     border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* 폼 컨테이너 */
 .form-container {
     background: rgba(255, 255, 255, 0.95);
-    padding: 30px;
+    padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     width: 90%;
     max-width: 450px;
     text-align: center;
-    margin-top: 120px;
+    margin: 50px 0; /* 상단과 하단 여백 설정 */
+    flex-shrink: 0; /* 화면 크기가 작아져도 눌리지 않도록 */
 }
 
 .form-container h1 {
     font-size: 20px;
     color: #333;
+    /*color: white;*/
     margin-bottom: 15px;
 }
 
 .form-container p {
     font-size: 14px;
     color: #555;
+    /*color: white;*/
     margin-bottom: 20px;
 }
 
@@ -104,6 +145,7 @@ textarea {
     align-items: baseline;
     gap: 10px;
     color: #333;
+    /*color: white;*/
     margin-bottom: 10px; /* 추가 여백 */
 }
 
@@ -153,4 +195,52 @@ input[type="submit"].submit-disabled {
     margin-top: 5px;
     margin-bottom: 10px;
     display: none; /* 기본적으로 숨김 처리 */
+}
+
+@media (max-width: 1024px) {
+    .nav-buttons {
+        gap: 10px; /* 간격을 줄임 */
+    }
+
+    .nav-buttons a {
+        font-size: 15px; /* 글자 크기도 줄임 */
+    }
+}
+
+/* 모바일 화면용 스타일 */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block; /* 모바일에서 메뉴 아이콘 표시 */
+        margin-right: 20px;
+    }
+
+    .admin-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 5px; /* ADMIN과 ☰ 버튼 간격 줄이기 */
+    }
+
+    .nav-buttons {
+        display: none; /* 기본적으로 숨김 */
+        flex-direction: column;
+        align-items: flex-start; /* 버튼을 왼쪽 정렬 */
+        position: absolute;
+        top: 60px;
+        right: 0px;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 10px;
+        border-radius: 8px;
+        width: auto;
+        z-index: 9999; /* 가장 위에 표시 */
+    }
+
+    .nav-buttons.show {
+        display: flex; /* 메뉴 클릭 시 표시 */
+    }
+
+    header {
+        position: fixed;
+        z-index: 1000; /* nav-buttons보다 낮게 설정 */
+    }
 }
