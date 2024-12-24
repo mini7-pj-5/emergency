@@ -2,6 +2,9 @@
 function initializeMap(hospitals, userLatitude, userLongitude) {
     let activeInfoWindow = null; // 현재 활성화된 정보창을 추적
 
+    if (!hospitals || hospitals.length === 0) {
+        return; // 함수 실행 중단
+    }
     try {
         const map = new naver.maps.Map('map', {
             center: new naver.maps.LatLng(userLatitude, userLongitude),
