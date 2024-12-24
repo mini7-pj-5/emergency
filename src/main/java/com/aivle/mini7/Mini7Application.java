@@ -9,6 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class Mini7Application {
 
     public static void main(String[] args) {
+
         SpringApplication.run(Mini7Application.class, args);
     }
 

@@ -1,0 +1,156 @@
+/* Body 스타일 */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('https://mblogthumb-phinf.pstatic.net/MjAxODEyMDZfMTQz/MDAxNTQ0MTA2Nzk5MTA3.KWoAo5UtOyaANPdoEdc419sMt7YYQj19Zu9zfGGioawg.FEJ5OBjo4t0uuy3vrRxSMPwPqGlfng1wzxBLiBCXXkwg.PNG.jungsh08033/image_8357606361544106773358.png?type=w800');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/* 헤더 스타일 */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-buttons a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav-buttons a:hover {
+    color: lightgray;
+}
+
+.admin-button {
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 12px;
+    border: 1px solid white;
+    border-radius: 4px;
+}
+
+/* 폼 컨테이너 */
+.form-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    margin-top: 120px;
+}
+
+.form-container h1 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.form-container p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* 텍스트 박스 및 입력 칸 */
+textarea,
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: none;
+}
+
+.input-group {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    color: #333;
+    margin-bottom: 10px; /* 추가 여백 */
+}
+
+.input-group label {
+    flex: 1;
+    font-size: 14px;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.input-group input[type="number"] {
+    flex: 0.3;
+    max-width: 80px;
+    text-align: center;
+}
+
+/* 제출 버튼 */
+input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* 비활성화 상태 스타일 */
+input[type="submit"].submit-disabled {
+    background-color: #d3d3d3;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* 경고 메시지 스타일 */
+.error-message {
+    color: red !important;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: none; /* 기본적으로 숨김 처리 */
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9fafc;
+        }
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-buttons a {
+            color: white;
+            text-decoration: none;
+        }
+        .admin-button {
+            background-color: red;
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        .board-container {
+            margin: 50px auto;
+            width: 80%;
+            max-width: 800px;
+        }
+        .board-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .board-header h2 {
+            margin: 0;
+        }
+        .write-button {
+            background: #007bff;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        .search-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .search-container input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px;
+        }
+        .search-container button {
+            padding: 8px 12px;
+            border: none;
+            background: #28a745;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .search-container button:hover {
+
+            background: #218838;
+        }
+        .board-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .board-item h3 {
+            margin: 0 0 5px;
+        }
+        .board-item p {
+            margin: 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">Aivle School 7기</div>
+    <div class="nav-buttons">
+        <a href="/">Home</a>
+        <a href="/board">Board</a>
+        <a href="/qna">Q&A</a>
+    </div>
+    <a href="/admin" class="admin-button">ADMIN</a>
+</header>
+
+<div class="board-container">
+    <div class="board-header">
+        <h2>게시판</h2>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="제목 또는 병원 이름 검색">
+            <button onclick="searchBoard()">검색</button>
+        </div>
+        <a href="/board/write" class="write-button">글쓰기</a>
+    </div>
+    <!-- 게시글 목록 -->
+    <div class="board-item" th:each="post : ${boardPosts}">
+        <h3 th:text="${post.hospitalName}">병원 이름</h3>
+        <p th:text="${post.content}">게시글 내용</p>
+    </div>
+</div>
+
+<script>
+    function searchBoard() {
+        const searchValue = document.getElementById('searchInput').value.trim();
+        if (searchValue) {
+            window.location.href = `/board?search=${encodeURIComponent(searchValue)}`;
+        } else {
+            alert('검색어를 입력해주세요.');
+        }
+    }
+</script>
+</body>
+</html>

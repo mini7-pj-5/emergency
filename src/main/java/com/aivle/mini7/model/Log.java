@@ -32,29 +32,29 @@ public class Log {
     private Integer emClass;
 
     @Column(nullable = false)
-    private String hospital1;
+    private String hospital1 = "Unknown";
 
     @Column(nullable = false)
-    private String addr1;
+    private String addr1 = "Unknown";
 
     @Column(nullable = false)
-    private String tel1;
+    private String tel1 = "Unknown";
 
     @Column(nullable = false)
-    private String hospital2;
+    private String hospital2 = "Unknown";
 
     @Column(nullable = false)
-    private String addr2;
+    private String addr2 = "Unknown";
 
     @Column(nullable = false)
-    private String tel2;
+    private String tel2 = "Unknown";
 
     @Column(nullable = false)
-    private String hospital3;
+    private String hospital3 = "Unknown";
 
     @Column(nullable = false)
-    private String addr3;
+    private String addr3 = "Unknown";
 
     @Column(nullable = false)
-    private String tel3;
+    private String tel3 = "Unknown";
 }

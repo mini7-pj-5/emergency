@@ -4,138 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emergency Input</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('https://mblogthumb-phinf.pstatic.net/MjAxODEyMDZfMTQz/MDAxNTQ0MTA2Nzk5MTA3.KWoAo5UtOyaANPdoEdc419sMt7YYQj19Zu9zfGGioawg.FEJ5OBjo4t0uuy3vrRxSMPwPqGlfng1wzxBLiBCXXkwg.PNG.jungsh08033/image_8357606361544106773358.png?type=w800');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-        }
-        .logo {
-            font-size: 18px;
-            font-weight: bold;
-            margin-left: 20px; /* 두 칸 띄우기 */
-        }
-        .nav-buttons {
-            display: flex;
-            gap: 45px; /* 3칸 간격 */
-            margin: 0 auto; /* 가운데 정렬 */
-        }
-        .nav-buttons a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px; /* Increased from 14px to 15px */
-            transition: color 0.3s; /* Transition only for color */
-        }
-        .nav-buttons a:hover {
-            color: lightgray; /* Change hover effect to color only */
-        }
-        .admin-button {
-            background-color: red;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            padding: 8px 12px;
-            border: 1px solid white;
-            border-radius: 4px;
-            margin-right: 20px; /* 두 칸 띄우기 */
-        }
-        .form-container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            width: 350px;
-            text-align: center;
-            margin-top: 100px; /* To avoid overlap with the fixed header */
-        }
-        .form-container h1 {
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 10px;
-        }
-        .form-container p {
-            font-size: 12px;
-            color: #555;
-            margin-bottom: 20px;
-        }
-        .form-container textarea,
-        .form-container input[type="text"] {
-            width: calc(50% - 5px);
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-        .form-container textarea {
-            width: 100%;
-            resize: none;
-        }
-        .form-container input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-        }
-        .form-container input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/main_styles.css">
+    <script src="/js/form_validation.js" defer></script> <!-- Validation 스크립트 -->
+    <script src="/js/location.js" defer></script> <!-- 위치 정보 스크립트 -->
+    <script src="/js/naver_map.js" defer></script> <!-- 네이버 지도 스크립트 -->
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ynqwzu7w93"></script>
 </head>
-<body>
+
+<body onload="setLocationAndInitializeMap()">
 
 <header>
-    <div class="logo">  Aivle School 7기</div>
+    <div class="logo">Aivle School 7기</div>
     <div class="nav-buttons">
-        <a href="https://mini7-spring-a061058-d9anczfpctebd8ca.koreacentral-01.azurewebsites.net/">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
+        <a href="/">Home</a>
+        <a href="/board">Board</a>
+        <a href="#">Q&A</a>
     </div>
-    <a href="https://mini7-spring-a061058-d9anczfpctebd8ca.koreacentral-01.azurewebsites.net/admin" class="admin-button">ADMIN  </a>
+    <a href="/admin" class="admin-button">ADMIN</a>
 </header>
 
 <div class="form-container">
     <h1>응급상황과 위치를 넣으세요.</h1>
     <p>Request your emergency situation and location details.</p>
     <form action="/recommend_hospital" method="application/x-www-form-urlencoded">
-        <label>
-            <textarea name="request" rows="4" placeholder="Requests">교통사고가 났어요. 머리에 피가 많이나고 있습니다. 숨을 쉬지 않아요.</textarea>
-        </label>
-        <div style="display: flex; gap: 10px;">
-            <label>
-                <input type="text" name="latitude" value="37.538435245262626" placeholder="Latitude">
-            </label>
-            <label>
-                <input type="text" name="longitude" value="126.98982802695484" placeholder="Longitude">
-            </label>
+        <div class="input-group">
+            <textarea id="request" name="request" rows="4" placeholder="Requests"></textarea>
         </div>
-        <input type="submit" value="Submit">
+        <p id="request-error" class="error-message" data-message="Request는 필수 입력값입니다."></p>
+
+        <div class="input-group">
+            <label for="latitude">Latitude:</label>
+            <input type="text" id="latitude" name="latitude" placeholder="Latitude">
+        </div>
+        <p id="latitude-error" class="error-message" data-message="위도는 필수 입력값입니다."></p>
+
+        <div class="input-group">
+            <label for="longitude">Longitude:</label>
+            <input type="text" id="longitude" name="longitude" placeholder="Longitude">
+        </div>
+        <p id="longitude-error" class="error-message" data-message="경도는 필수 입력값입니다."></p>
+
+        <div class="input-group">
+            <label for="top_n">검색할 병원 수 (최대 3개):</label>
+            <input type="number" id="top_n" name="top_n" value="3" min="1" max="3">
+        </div>
+        <p id="top_n-error" class="error-message" data-message="검색 병원 수는 1에서 3 사이여야 합니다."></p>
+
+        <!-- 네이버 지도 표시 -->
+        <div id="map" style="width: 100%; height: 300px; margin-top: 20px; border: 1px solid #ccc;"></div>
+
+        <input type="submit" id="submit-button" value="Submit" class="submit-enabled">
     </form>
 </div>
 

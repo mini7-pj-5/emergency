@@ -45,6 +45,15 @@ public class LogService {
                 .inputLongitude(longitude)
                 .emClass(emClass)
                 .datetime(String.valueOf(new Date()))
+                .hospital1("Unknown")
+                .addr1("Unknown")
+                .tel1("Unknown")
+                .hospital2("Unknown")
+                .addr2("Unknown")
+                .tel2("Unknown")
+                .hospital3("Unknown")
+                .addr3("Unknown")
+                .tel3("Unknown")
                 .build();
         int count = 1;
         for(HospitalResponse hospitalResponse : hospitalResponseList) {

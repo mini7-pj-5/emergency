@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.hospital-table-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 16px;
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.no-data-message {
+    text-align: center;
+    font-size: 18px;
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.hospital-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.hospital-table th,
+.hospital-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.hospital-table th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+}
+
+.hospital-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.hospital-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.hospital-table td {
+    color: #555;
+}
+
+.hospital-table td:last-child {
+    font-weight: bold;
+    color: #007bff;
+}
