@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #00bcd4;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .faq-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-tabs {
+            display: flex;
+            justify-content: space-around;
+            border-bottom: 2px solid #00bcd4;
+            margin-bottom: 20px;
+        }
+
+        .faq-tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px 0;
+            cursor: pointer;
+            font-weight: bold;
+            color: #555;
+            border-bottom: 2px solid transparent;
+        }
+
+        .faq-tab.active {
+            color: #00bcd4;
+            border-bottom: 2px solid #00bcd4;
+        }
+
+        .faq-item {
+            margin: 15px 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            display: none; /* 기본적으로 숨김 */
+        }
+
+        .faq-item h3 {
+            margin: 0;
+            cursor: pointer;
+            color: #333;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-item p {
+            margin: 10px 0 0;
+            font-size: 16px;
+            color: #555;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.faq-tab');
+            const items = document.querySelectorAll('.faq-item');
+
+            tabs.forEach((tab, index) => {
+                tab.addEventListener('click', () => {
+                    // 모든 탭에서 'active' 클래스 제거
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    // 모든 항목 숨김
+                    items.forEach(item => item.style.display = 'none');
+
+                    // 선택된 탭에 따라 항목 표시
+                    if (index === 0) { // '전체' 탭
+                        items.forEach(item => item.style.display = 'block');
+                    } else if (index === 1) { // '위치' 탭
+                        items.forEach(item => {
+                            if (item.classList.contains('location')) {
+                                item.style.display = 'block';
+                            }
+                        });
+                    } else if (index === 2) { // '응급실' 탭
+                        items.forEach(item => {
+                            if (item.classList.contains('emergency')) {
+                                item.style.display = 'block';
+                            }
+                        });
+                    } else if (index === 3) { // '기타' 탭
+                        items.forEach(item => {
+                            if (item.classList.contains('other')) {
+                                item.style.display = 'block';
+                            }
+                        });
+                    }
+                });
+            });
+
+            // 기본적으로 '전체' 탭 활성화
+            tabs[0].click();
+        });
+    </script>
+</head>
+<body>
+<header>FAQ</header>
+
+<div class="faq-container">
+    <!-- 탭 -->
+    <div class="faq-tabs">
+        <div class="faq-tab active">전체</div>
+        <div class="faq-tab">위치</div>
+        <div class="faq-tab">응급실</div>
+        <div class="faq-tab">기타</div>
+    </div>
+
+    <!-- FAQ 항목 -->
+    <div class="faq-items">
+        <!-- 위치 관련 FAQ -->
+        <div class="faq-item location">
+            <h3>현재 위치로 위도, 경도를 바꾸고 싶은데 어떻게 하나요?<span>+</span></h3>
+            <p>지도 조정을 통해 위도, 경도 설정이 가능합니다.</p>
+        </div>
+        <div class="faq-item location">
+            <h3>위치가 이상하게 나와요. <span>+</span></h3>
+            <p>현재 사이트에서 위치에 액세스할 수 없도록 차단되어 기본 위치를 사용하고 있습니다.</p>
+            <p>PC: 상단 주소창 우측의 위치 아이콘 클릭 후 사이트의 위치 액세스 항상 허용을 선택</p>
+            <p>스마트폰: 정확한 위치를 사용하도록 권한 허용을 선택</p>
+        </div>
+        <div class="faq-item location">
+            <h3>위치 정보가 업데이트되지 않아요. <span>+</span></h3>
+            <p>네트워크 연결 상태가 불안정하면 위치 정보 업데이트가 지연될 수 있습니다.</p>
+            <p>브라우저 캐시를 삭제한 후 다시 시도하세요.</p>
+        </div>
+
+        <!-- 응급실 관련 FAQ -->
+        <div class="faq-item emergency">
+            <h3>등급은 어떻게 설정되는 건가요? <span>+</span></h3>
+            <p>응급실 내원 환자 분류 KTAS 기준 5단계로, 자체 개발한 BERT 모델을 사용해 등급을 선정해 보여줍니다.</p>
+        </div>
+        <div class="faq-item emergency">
+            <h3>응급실 정보는 어떻게 추천되는 건가요? <span>+</span></h3>
+            <p>현재 교통상황을 고려해 가장 가까운 응급실을 추천합니다.</p>
+        </div>
+
+        <!-- 기타 FAQ -->
+        <div class="faq-item other">
+            <h3>Admin 페이지를 보고 싶어요. <span>+</span></h3>
+            <p>Admin 페이지는 관리자 페이지로, 허용된 관리자만 사용 가능합니다.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
