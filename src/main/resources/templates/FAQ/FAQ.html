@@ -1,39 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ</title>
     <style>
+        /* 헤더 관련 스타일 */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1; /* 버튼들이 남는 공간을 채우도록 설정 */
+            margin-right: 60px;
+        }
+
+        .nav-buttons a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-buttons a:hover,
+        .nav-buttons a.active {
+            color: #007bff; /* 활성화 상태 색상 */
+        }
+
+        .admin-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .admin-button {
+            background-color: red;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .admin-button:hover {
+            background-color: darkred;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            display: none; /* 모바일에서만 보이도록 설정 */
+        }
+
+        /* FAQ 관련 스타일 */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
-        }
-
-        header {
-            text-align: center;
-            padding: 20px;
-            background-color: #00bcd4;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
+            background-color: white;
         }
 
         .faq-container {
-            max-width: 1200px;
-            margin: 20px auto;
+            max-width: 95%;
+            margin: 100px auto; /* 헤더 높이 고려 */
             background: white;
-            padding: 20px;
-            border-radius: 8px;
+            padding: 30px;
+            border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .faq-tabs {
             display: flex;
             justify-content: space-around;
-            border-bottom: 2px solid #00bcd4;
+            border-bottom: 2px solid #007bff;
             margin-bottom: 20px;
         }
 
@@ -42,88 +103,134 @@
             text-align: center;
             padding: 10px 0;
             cursor: pointer;
+            font-size: 20px;
             font-weight: bold;
             color: #555;
             border-bottom: 2px solid transparent;
         }
 
         .faq-tab.active {
-            color: #00bcd4;
-            border-bottom: 2px solid #00bcd4;
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
         }
 
         .faq-item {
             margin: 15px 0;
+            padding: 0 20px 15px 20px;
             border-bottom: 1px solid #ddd;
-            padding-bottom: 15px;
-            display: none; /* 기본적으로 숨김 */
         }
 
         .faq-item h3 {
             margin: 0;
             cursor: pointer;
             color: #333;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .faq-item p {
-            margin: 10px 0 0;
-            font-size: 16px;
+            margin: 13px 10px 0;
+            font-size: 17px;
             color: #555;
+            display: none;
+        }
+
+        .faq-item.open p {
+            display: block;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block; /* 모바일에서 메뉴 아이콘 보이기 */
+            }
+
+            .nav-buttons {
+                display: none; /* 기본적으로 숨김 */
+                flex-direction: column;
+                align-items: flex-start;
+                background: rgba(0, 0, 0, 0.8);
+                padding: 10px;
+                border-radius: 5px;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                z-index: 999;
+            }
+
+            .nav-buttons.show {
+                display: flex; /* 모바일 메뉴 활성화 */
+            }
         }
     </style>
     <script>
+        function toggleMenu() {
+            const navButtons = document.querySelector('.nav-buttons');
+            navButtons.classList.toggle('show');
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const tabs = document.querySelectorAll('.faq-tab');
             const items = document.querySelectorAll('.faq-item');
 
             tabs.forEach((tab, index) => {
                 tab.addEventListener('click', () => {
-                    // 모든 탭에서 'active' 클래스 제거
                     tabs.forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
 
-                    // 모든 항목 숨김
                     items.forEach(item => item.style.display = 'none');
 
-                    // 선택된 탭에 따라 항목 표시
-                    if (index === 0) { // '전체' 탭
+                    if (index === 0) {
                         items.forEach(item => item.style.display = 'block');
-                    } else if (index === 1) { // '위치' 탭
+                    } else if (index === 1) {
                         items.forEach(item => {
-                            if (item.classList.contains('location')) {
-                                item.style.display = 'block';
-                            }
+                            if (item.classList.contains('location')) item.style.display = 'block';
                         });
-                    } else if (index === 2) { // '응급실' 탭
+                    } else if (index === 2) {
                         items.forEach(item => {
-                            if (item.classList.contains('emergency')) {
-                                item.style.display = 'block';
-                            }
+                            if (item.classList.contains('emergency')) item.style.display = 'block';
                         });
-                    } else if (index === 3) { // '기타' 탭
+                    } else if (index === 3) {
                         items.forEach(item => {
-                            if (item.classList.contains('other')) {
-                                item.style.display = 'block';
-                            }
+                            if (item.classList.contains('other')) item.style.display = 'block';
                         });
                     }
                 });
             });
 
-            // 기본적으로 '전체' 탭 활성화
+            items.forEach(item => {
+                const header = item.querySelector('h3');
+                header.addEventListener('click', () => {
+                    item.classList.toggle('open');
+                });
+            });
+
             tabs[0].click();
         });
     </script>
 </head>
 <body>
-<header>FAQ</header>
+<header>
+    <div class="logo">Aivle School 7차</div>
+    <div class="nav-buttons">
+        <a href="/">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#team">Team</a>
+        <a href="/board">Board</a>
+        <a href="#contact">Contact</a>
+        <a href="/faq">FAQ</a>
+    </div>
+    <div class="admin-container">
+        <a href="/admin" class="admin-button">ADMIN</a>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    </div>
+</header>
 
+<!-- FAQ 컨테이너 -->
 <div class="faq-container">
-    <!-- 탭 -->
     <div class="faq-tabs">
         <div class="faq-tab active">전체</div>
         <div class="faq-tab">위치</div>
@@ -131,7 +238,6 @@
         <div class="faq-tab">기타</div>
     </div>
 
-    <!-- FAQ 항목 -->
     <div class="faq-items">
         <!-- 위치 관련 FAQ -->
         <div class="faq-item location">
@@ -144,16 +250,11 @@
             <p>PC: 상단 주소창 우측의 위치 아이콘 클릭 후 사이트의 위치 액세스 항상 허용을 선택</p>
             <p>스마트폰: 정확한 위치를 사용하도록 권한 허용을 선택</p>
         </div>
-        <div class="faq-item location">
-            <h3>위치 정보가 업데이트되지 않아요. <span>+</span></h3>
-            <p>네트워크 연결 상태가 불안정하면 위치 정보 업데이트가 지연될 수 있습니다.</p>
-            <p>브라우저 캐시를 삭제한 후 다시 시도하세요.</p>
-        </div>
 
         <!-- 응급실 관련 FAQ -->
         <div class="faq-item emergency">
-            <h3>등급은 어떻게 설정되는 건가요? <span>+</span></h3>
-            <p>응급실 내원 환자 분류 KTAS 기준 5단계로, 자체 개발한 BERT 모델을 사용해 등급을 선정해 보여줍니다.</p>
+            <h3>등급은 어떻게 판정되는 건가요? <span>+</span></h3>
+            <p>응급실 내원 환자 분류 KTAS 기준 5단계로 자체 개발한 BERT 모델을 사용해 등급을 선정해 보여줍니다.</p>
         </div>
         <div class="faq-item emergency">
             <h3>응급실 정보는 어떻게 추천되는 건가요? <span>+</span></h3>
