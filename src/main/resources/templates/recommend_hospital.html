@@ -34,7 +34,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="hospital, stat : ${hospitals}">
+        <tr th:each="hospital, stat : ${hospitals}" id="hospital-row-${stat.index}">
             <td th:text="${stat.index + 1}"></td>
             <td th:text="${hospital.hospitalName}"></td>
             <td th:text="${hospital.address}"></td>
