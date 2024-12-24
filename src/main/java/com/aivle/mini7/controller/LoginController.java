@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -118,17 +116,15 @@ public class LoginController {
 
                 if (userInfoResponse.getStatusCode() == HttpStatus.OK && userInfoResponse.getBody() != null) {
                     Map<String, Object> userInfo = userInfoResponse.getBody();
-                    System.out.println("네이버 사용자 정보: " + userInfo);
 
-                    /*
-                     * 3. 사용자 정보 처리
-                     * - 세션 저장, DB 저장, 회원가입 처리 등
-                     * 예시로, 세션에 사용자 정보를 저장하고 메인 페이지로 리다이렉트
-                     */
-                    session.setAttribute("user", userInfo);
+                    // 인증 성공 플래그 저장
+                    session.setAttribute("isLoggedIn", true); // 인증 플래그 저장
+                    session.setAttribute("user", userInfo); // 사용자 정보 저장
 
-                    return "redirect:/"; // 메인 페이지로 리다이렉트
+                    // 인증 후 관리자 페이지로 리다이렉트
+                    return "redirect:/admin";
                 }
+
             }
         }
 
