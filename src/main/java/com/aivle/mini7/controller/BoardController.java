@@ -71,4 +71,27 @@ public class BoardController {
 
         return "redirect:/board";
     }
+
+    @GetMapping("/board/post")
+    public ModelAndView getPostDetails(@RequestParam("id") Long id) {
+        BoardPostResponse post = boardService.getPostById(id);
+
+        if (post == null) {
+            throw new IllegalArgumentException("해당 ID의 게시글을 찾을 수 없습니다: " + id);
+        }
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("board/post");
+        mv.addObject("post", post);
+
+        return mv;
+    }
+
+    @PostMapping("/board/delete-request")
+    public String requestDelete(@RequestParam("id") Long id) {
+        boardService.requestDelete(id);
+        return "redirect:/board";
+    }
+
+
 }

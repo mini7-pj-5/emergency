@@ -51,35 +51,32 @@
         .board-header h2 {
             margin: 0;
         }
-        .write-button {
-            background: #007bff;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
-            text-decoration: none;
-        }
         .search-container {
             display: flex;
             gap: 10px;
             align-items: center;
+            width: 70%;
         }
         .search-container input[type="text"] {
-            padding: 8px;
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            width: 200px;
+            width: 80%;
         }
         .search-container button {
-            padding: 8px 12px;
-            border: none;
+            padding: 10px 16px;
             background: #28a745;
             color: white;
             border-radius: 4px;
+            border: none;
             cursor: pointer;
         }
-        .search-container button:hover {
-
-            background: #218838;
+        .write-button {
+            padding: 10px 16px;
+            background: #007bff;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
         }
         .board-item {
             background: white;
@@ -87,13 +84,20 @@
             margin-bottom: 10px;
             border-radius: 4px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .board-item h3 {
-            margin: 0 0 5px;
+            margin: 0;
         }
         .board-item p {
             margin: 0;
             color: #555;
+        }
+        .delete-status {
+            color: red;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -119,8 +123,14 @@
     </div>
     <!-- 게시글 목록 -->
     <div class="board-item" th:each="post : ${boardPosts}">
-        <h3 th:text="${post.hospitalName}">병원 이름</h3>
-        <p th:text="${post.content}">게시글 내용</p>
+        <div>
+            <h3 th:text="${post.hospitalName}">병원 이름</h3>
+            <p th:text="${post.category}">카테고리</p>
+        </div>
+        <div>
+            <span class="delete-status" th:if="${post.deleteRequested}">삭제 요청 처리 중</span>
+            <a th:href="@{'/board/post?id=' + ${post.id}}">자세히 보기</a>
+        </div>
     </div>
 </div>
 

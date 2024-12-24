@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 상세보기</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9fafc;
+        }
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-buttons a {
+            color: white;
+            text-decoration: none;
+        }
+        .admin-button {
+            background-color: red;
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        .post-container {
+            margin: 50px auto;
+            width: 80%;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .post-container h2 {
+            margin-bottom: 10px;
+        }
+        .post-container p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        .post-container .content {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .post-container .file-section {
+            margin-top: 20px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        .button-container button {
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+        }
+        .delete-button {
+            background: red;
+            color: white;
+        }
+        .back-button {
+            background: #007bff;
+            color: white;
+        }
+        .delete-status {
+            margin-top: 20px;
+            color: red;
+            font-size: 14px;
+            text-align: right;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">Aivle School 7기</div>
+    <div class="nav-buttons">
+        <a href="/">Home</a>
+        <a href="/board">Board</a>
+        <a href="/qna">Q&A</a>
+    </div>
+    <a href="/admin" class="admin-button">ADMIN</a>
+</header>
+
+<div class="post-container">
+    <h2 th:text="${post.hospitalName}">병원 이름</h2>
+    <p><strong>카테고리:</strong> <span th:text="${post.category}">카테고리</span></p>
+    <p><strong>내용:</strong></p>
+    <p class="content" th:text="${post.content}">게시글 내용</p>
+
+    <!-- 첨부 파일 -->
+    <div class="file-section" th:if="${post.fileName != null}">
+        <p><strong>첨부 파일:</strong>
+            <a th:href="@{'/files/' + ${post.fileName}}" th:text="${post.fileName}" download></a>
+        </p>
+    </div>
+
+    <!-- 버튼 영역 -->
+    <div class="button-container">
+        <button class="back-button" onclick="window.location.href='/board'">뒤로 가기</button>
+        <button class="delete-button" onclick="requestDelete()">삭제 요청</button>
+    </div>
+
+    <!-- 삭제 상태 표시 -->
+    <div id="deleteStatus" class="delete-status">
+        삭제 요청 처리 중...
+    </div>
+</div>
+
+<script>
+    function requestDelete() {
+        const postId = new URLSearchParams(window.location.search).get('id');
+        if (confirm('정말로 삭제 요청을 하시겠습니까?')) {
+            fetch(`/board/delete-request?id=${postId}`, { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById('deleteStatus').style.display = 'block';
+                        setTimeout(() => {
+                            window.location.href = '/board';
+                        }, 2000);
+                    } else {
+                        alert('삭제 요청에 실패했습니다.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('오류가 발생했습니다.');
+                });
+        }
+    }
+</script>
+</body>
+</html>

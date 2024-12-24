@@ -31,30 +31,39 @@ public class Log {
     @Column(name = "em_class", nullable = false)
     private Integer emClass;
 
+    @Builder.Default
     @Column(nullable = false)
     private String hospital1 = "Unknown";
 
+    @Builder.Default
     @Column(nullable = false)
     private String addr1 = "Unknown";
 
+    @Builder.Default
     @Column(nullable = false)
     private String tel1 = "Unknown";
 
+    @Builder.Default
     @Column(nullable = false)
     private String hospital2 = "Unknown";
 
+    @Builder.Default
     @Column(nullable = false)
     private String addr2 = "Unknown";
 
+    @Builder.Default
     @Column(nullable = false)
     private String tel2 = "Unknown";
 
+    @Builder.Default
     @Column(nullable = false)
     private String hospital3 = "Unknown";
 
+    @Builder.Default
     @Column(nullable = false)
     private String addr3 = "Unknown";
 
+    @Builder.Default
     @Column(nullable = false)
     private String tel3 = "Unknown";
 }
