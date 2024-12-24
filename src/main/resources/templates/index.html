@@ -14,13 +14,20 @@
 <body onload="setLocationAndInitializeMap()">
 
 <header>
-    <div class="logo">Aivle School 7기</div>
+    <div class="logo">Aivle School 7차</div>
     <div class="nav-buttons">
-        <a href="/">Home</a>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#team">Team</a>
         <a href="/board">Board</a>
+        <a href="#contact">Contact</a>
         <a href="#">Q&A</a>
     </div>
-    <a href="/admin" class="admin-button">ADMIN</a>
+    <div class="admin-container">
+        <a href="/admin" class="admin-button">ADMIN</a>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    </div>
 </header>
 
 <div class="form-container">
@@ -56,6 +63,13 @@
         <input type="submit" id="submit-button" value="Submit" class="submit-enabled">
     </form>
 </div>
+
+<script>
+    function toggleMenu() {
+        const navButtons = document.querySelector('.nav-buttons');
+        navButtons.classList.toggle('show');
+    }
+</script>
 
 </body>
 </html>
