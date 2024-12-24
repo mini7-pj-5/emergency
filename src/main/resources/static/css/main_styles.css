@@ -245,3 +245,19 @@ input[type="submit"].submit-disabled {
         z-index: 1000; /* nav-buttons보다 낮게 설정 */
     }
 }
+
+/* 녹음 버튼 스타일 */
+.record-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.record-button.recording {
+    background-color: #ff0000;
+}

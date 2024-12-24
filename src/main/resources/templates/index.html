@@ -9,6 +9,7 @@
     <script src="/js/location.js" defer></script> <!-- 위치 정보 스크립트 -->
     <script src="/js/naver_map.js" defer></script> <!-- 네이버 지도 스크립트 -->
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ynqwzu7w93"></script>
+    <script src="/js/speech_recognition.js" defer></script> <!-- 음성 인식 스크립트 -->
 </head>
 
 <body onload="setLocationAndInitializeMap()">
@@ -36,6 +37,8 @@
     <form action="/recommend_hospital" method="application/x-www-form-urlencoded">
         <div class="input-group">
             <textarea id="request" name="request" rows="4" placeholder="Requests"></textarea>
+            <!-- 녹음 버튼 추가 -->
+            <button type="button" id="recordButton" class="record-button">🎤 녹음</button>
         </div>
         <p id="request-error" class="error-message" data-message="Request는 필수 입력값입니다."></p>
 
@@ -63,13 +66,6 @@
         <input type="submit" id="submit-button" value="Submit" class="submit-enabled">
     </form>
 </div>
-
-<script>
-    function toggleMenu() {
-        const navButtons = document.querySelector('.nav-buttons');
-        navButtons.classList.toggle('show');
-    }
-</script>
 
 </body>
 </html>
