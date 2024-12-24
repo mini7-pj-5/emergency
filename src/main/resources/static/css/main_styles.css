@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-image: url('https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQu6WzizP3eGwU1c3EMf-FfvOuBXk9nDIVO0DLyQiDVvLeRmAA_');
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoGv5UvJMcYxWqJdbSMelLe4dQZcHvXzW_7Q&s');
     background-size: cover;
     background-position: center;
     min-height: 100vh; /* 전체 화면 높이 설정 */
@@ -15,17 +15,18 @@ body {
     position: relative; /* 아래 패딩 여백 유지 */
 }
 
-body::before {
-    content: '';
-    position: fixed; /* fixed로 설정하여 스크롤에도 고정 */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; /* 화면 전체에 적용 */
-    background: rgba(0, 0, 0, 0.5); /* 어두운 레이어 */
-    z-index: 1; /* 텍스트 아래에 레이어를 위치 */
-    pointer-events: none; /* 클릭이 레이어에 막히지 않도록 설정 */
-}
+/*body::before {*/
+/*    content: '';*/
+/*    position: fixed; !* fixed로 설정하여 스크롤에도 고정 *!*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%; !* 화면 전체에 적용 *!*/
+/*    background: rgba(0, 0, 0, 0.5); !* 어두운 레이어 *!*/
+/*    z-index: 1; !* 텍스트 아래에 레이어를 위치 *!*/
+/*    pointer-events: none; !* 클릭이 레이어에 막히지 않도록 설정 *!*/
+/*} // 화면 불투명한거 지울 때*/
+
 
 body * {
     position: relative; /* 텍스트를 가상 요소 위로 올림 */

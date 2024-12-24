@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
+  <g transform="matrix(1.36,0,0,1.36,-92.16000000000003,-92.16000000000003)">
+    <path d="m462.982 202.09 19.92-19.92L502 201.268M482.902 182.17v147.661M49.019 309.91l-19.921 19.921L10 310.733M29.098 329.831V182.17M309.91 462.982l19.921 19.92L310.733 502M329.831 482.902H182.169M202.09 49.018l-19.921-19.92L201.267 10M182.169 29.098h147.662" style="stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" fill="none" stroke="#000000" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" data-original="#000000"/>
+    <path d="M88.29 88.29h162.404v169.321H88.29z" style="" fill="#a0c8ff" data-original="#a0c8ff"/>
+    <path d="M295.318 88.29h-44.624v169.321H423.71V88.29h-40.409z" style="" fill="#ff7e96" data-original="#ff7e96"/>
+    <path d="M250.694 257.611h173.015V423.71H250.694z" style="" fill="#e7e7ef" data-original="#e7e7ef"/>
+    <path d="M88.29 257.611h162.404V423.71H88.29z" style="" fill="#ffce62" data-original="#ffce62"/>
+    <path d="M88.29 88.29h162.404v169.321H88.29z" style="stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" fill="none" stroke="#000000" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" data-original="#000000"/>
+    <path d="M295.318 88.29h-44.624v169.321H423.71V88.29h-40.409M250.694 257.611h173.015V423.71H250.694z" style="stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" fill="none" stroke="#000000" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" data-original="#000000"/>
+    <path d="M88.29 257.611h162.404V423.71H88.29z" style="stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" fill="none" stroke="#000000" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" data-original="#000000"/>
+    <path d="M88.29 88.29v73.76l73.76-73.76z" style="" fill="#ffffff" data-original="#ffffff" class=""/>
+    <path d="M88.29 88.29v73.76l73.76-73.76zM339.202 88.29h0" style="stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" fill="none" stroke="#000000" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" data-original="#000000"/>
+  </g>
+</svg>
