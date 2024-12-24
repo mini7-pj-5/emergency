@@ -3,64 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Recommended Hospitals</title>
-    <!-- CSS 파일 연결 -->
     <link rel="stylesheet" href="/css/hospital_index_style.css">
-    <!-- 네이버 지도 API -->
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ynqwzu7w93"></script>
-    <!-- 병원 지도 스크립트 -->
     <script src="/js/hospital_map.js" defer></script>
 </head>
 <body>
+<!-- 병원 정보 컨테이너 -->
 <div class="hospital-table-container">
     <h1 th:text="${message}">병원 추천 결과</h1>
-    <p th:if="${hospitals != null}" th:text="'검색 반경: ' + ${searchedRadius} + ' km'">검색 반경: 20 km</p>
+    <p th:if="${hospitals != null}" th:text="'검색 반경: ' + ${searchedRadius} + ' km'">검색 반경: 10 km</p>
     <p th:text="'예상 응급 등급: ' + ${predictedGrade}">예상 응급 등급: 3</p>
 
-    <!-- 지도 표시 영역 -->
-    <div id="map" th:if="${hospitals != null}" style="width: 100%; height: 400px; margin-bottom: 20px;"></div>
-
-    <table class="hospital-table" th:if="${hospitals != null}">
+    <table class="hospital-table" id="hospitalTable" th:if="${hospitals != null}">
         <thead>
         <tr>
-            <th>#</th>
-            <th>Hospital Name</th>
-            <th>Address</th>
-            <th>Emergency Type</th>
-            <th>Phone 1</th>
-            <th>Phone 3</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-            <th>Distance (km)</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="hospital, stat : ${hospitals}" id="hospital-row-${stat.index}">
             <td th:text="${stat.index + 1}"></td>
-            <td th:text="${hospital.hospitalName}"></td>
-            <td th:text="${hospital.address}"></td>
-            <td th:text="${hospital.emergencyMedicalInstitutionType}"></td>
-            <td th:text="${hospital.phoneNumber1}"></td>
-            <td th:text="${hospital.phoneNumber3}"></td>
-            <td th:text="${hospital.latitude}"></td>
-            <td th:text="${hospital.longitude}"></td>
-            <td th:text="${hospital.distance} + ' km'"></td>
+            <td>
+                <div class="hospital-info">
+                    <div class="hospital-name-distance">
+                        <span th:text="${hospital.hospitalName}"></span>
+                        <span th:text="'(' + ${hospital.distance} + ' km)'"></span>
+                    </div>
+                    <div class="hospital-details">
+                        <p><strong>병원 정보:</strong> <span th:text="${hospital.emergencyMedicalInstitutionType}"></span></p>
+                        <p><strong>주소:</strong> <span th:text="${hospital.address}"></span></p>
+                    </div>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>
 
-    <p class="no-data-message" th:if="${hospitals == null}">
-        추천된 병원이 없습니다.
-    </p>
+    <p class="no-data-message" th:if="${hospitals == null}">추천된 병원이 없습니다.</p>
 </div>
 
-<!-- JavaScript -->
+<!-- 지도 컨테이너 -->
+<div id="map" class="map-container"></div>
+
+<!-- 플로팅 정보 패널 -->
+<div id="floating-info-panel" class="floating-info-panel"></div>
+
 <script th:inline="javascript">
-    const hospitals = /*[[${hospitals}]]*/ []; // 병원 데이터
-    const userLatitude = /*[[${latitude}]]*/ 37.5665; // 사용자 위도
-    const userLongitude = /*[[${longitude}]]*/ 126.9780; // 사용자 경도
+    const hospitals = /*[[${hospitals}]]*/ [];
+    const userLatitude = /*[[${latitude}]]*/ 37.5665;
+    const userLongitude = /*[[${longitude}]]*/ 126.9780;
 
     document.addEventListener('DOMContentLoaded', function () {
-        initializeMap(hospitals, userLatitude, userLongitude); // 병원 데이터와 사용자 위치로 지도 초기화
+        initializeMap(hospitals, userLatitude, userLongitude);
+        addTableClickEvents();
     });
 </script>
 </body>
