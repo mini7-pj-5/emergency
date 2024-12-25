@@ -64,24 +64,17 @@
             text-decoration: none;
             color: #ffffff;
             display: block;
+            width: 100%;
         }
 
         /* 사이드바 메뉴 항목 hover */
-        .sidebar ul li a:hover {
+        .sidebar ul li:hover {
             background-color: #454545;
         }
 
         /* 활성화된 사이드바 메뉴 항목 */
         .sidebar ul li.active {
             background-color: #007bff;
-        }
-
-        /* 사이드바 메뉴 항목 비활성화 링크 텍스트 스타일 */
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #ffffff;
-            display: block;
-            pointer-events: none; /* 링크 클릭 비활성화 */
         }
 
         /* 본문 콘텐츠 영역 */
@@ -94,42 +87,94 @@
         /* 오른쪽 사이드바 스타일 */
         .right-sidebar {
             width: 300px;
-            background-color: #f4f4f4;
-            color: #000;
+            background-color: #ffffff;
             display: flex;
             flex-direction: column;
-            padding: 15px 20px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
         }
 
-        /* 오른쪽 사이드바 헤더 */
-        .right-sidebar .header {
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
+        /* 프로필 섹션 */
+        .right-sidebar .profile {
+            background-color: #2f2f2f;
+            color: white;
+            padding: 20px;
+            text-align: center;
         }
 
-        /* 오른쪽 사이드바 섹션 */
+        .right-sidebar .profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .right-sidebar .profile h3 {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+
+        .right-sidebar .profile p {
+            font-size: 14px;
+            color: #cccccc;
+        }
+
+        /* 정보 섹션 */
+        .right-sidebar .info {
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .right-sidebar .info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .right-sidebar .info p span {
+            font-weight: bold;
+        }
+
+        /* 섹션 스타일 */
         .right-sidebar .section {
-            margin-bottom: 20px;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
         }
 
         .right-sidebar .section-title {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
             margin-bottom: 10px;
-            color: #555;
+            color: #333;
         }
 
         .right-sidebar .section-content {
-            background-color: #fff;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            color: #333;
             font-size: 14px;
-            line-height: 1.5;
+            color: #666;
+        }
+
+        /* 메모 섹션 */
+        .right-sidebar .memo {
+            padding: 20px;
+            background-color: #fffacd;
+            color: #333;
+        }
+
+        .right-sidebar .memo p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .right-sidebar .memo button {
+            background-color: #2f2f2f;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .right-sidebar .memo button:hover {
+            background-color: #1e1e1e;
         }
 
         /* 헤더 박스 */
@@ -178,18 +223,19 @@
             max-height: 400px; /* 세로 스크롤바가 나타나는 최대 높이 설정 */
         }
 
+        /* 테이블 레이아웃 고정 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; /* 테이블 레이아웃 고정 */
+            margin: 0;
+        }
+
         thead {
             position: sticky; /* 헤더 고정 */
             top: 0; /* 고정 위치 지정 */
             background-color: #f4f4f4; /* 배경색 지정 */
             z-index: 2; /* 다른 요소 위로 올라오도록 설정 */
-        }
-
-        /* 테이블 스타일 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0;
         }
 
         /* 테이블 셀 스타일 */
@@ -198,6 +244,7 @@
             text-align: center;
             padding: 8px;
             font-size: 14px;
+            box-sizing: border-box; /* 패딩과 보더를 포함하여 너비 계산 */
             word-wrap: break-word;
             word-break: break-word;
         }
@@ -223,12 +270,15 @@
         .search-container {
             display: flex;
             align-items: center;
+            justify-content: space-between; /* 양 끝에 배치 */
+            width: 100%; /* 전체 너비 차지 */
             margin-bottom: 5px;
             background-color: white;
             border: 1px solid #ddd;
             border-radius: 4px;
             padding: 5px 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box; /* 패딩과 보더 포함 */
         }
 
         /* 검색 입력 필드 */
@@ -238,6 +288,8 @@
             font-size: 14px;
             outline: none;
             padding: 5px;
+            margin-right: 10px; /* 버튼과의 간격 확보 */
+            box-sizing: border-box; /* 패딩 포함 */
         }
 
         /* 검색 버튼 스타일 */
@@ -245,6 +297,10 @@
             background-color: transparent;
             border: none;
             cursor: pointer;
+            padding: 0; /* 버튼의 패딩 제거 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* 검색 버튼 이미지 */
@@ -293,6 +349,22 @@
             width: 100%;
             overflow-y: auto; /* 세로 스크롤만 활성화 */
         }
+
+        /* 반응형 디자인 (옵션) */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar, .right-sidebar {
+                width: 100%;
+                box-shadow: none;
+            }
+
+            .content-wrapper {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
@@ -336,7 +408,7 @@
                         <form th:action="@{/admin}" method="get">
                             <div class="search-container">
                                 <input type="text" placeholder=" 검색" name="search" th:value="${search}">
-                                <button type="submit">
+                                <button type="submit" aria-label="검색">
                                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgl8493ezGhFTss4OaPLwZptcB_bygSybbKw&s" alt="Search Icon">
                                 </button>
                             </div>
@@ -389,38 +461,46 @@
             <a th:if="${logList.hasPrevious()}"
                th:href="@{/admin(page=${logList.number - 1}, search=${search})}"
                class="pagination-button">
-                <img src="/img/leftButton.svg" alt="Previous" class="pagination-icon">
+                <img src="/img/left.svg" alt="Previous" class="pagination-icon">
             </a>
             <span th:text="${logList.number + 1} + ' / ' + ${logList.totalPages}"></span>
             <a th:if="${logList.hasNext()}"
                th:href="@{/admin(page=${logList.number + 1}, search=${search})}"
                class="pagination-button">
-                <img src="/img/rightButton.svg" alt="Next" class="pagination-icon">
+                <img src="/img/right.svg" alt="Next" class="pagination-icon">
             </a>
         </div>
-
     </div>
-</div>
 
-<!-- 오른쪽 사이드바 -->
-<div class="right-sidebar">
-    <div class="header">관리 설정</div>
-    <div class="section">
-        <div class="section-title">운영진 설정</div>
-        <div class="section-content">
-            <p>운영진 정보를 확인 및 관리할 수 있습니다.</p>
+    <!-- 오른쪽 사이드바 -->
+    <div class="right-sidebar">
+        <!-- 프로필 섹션 -->
+        <div class="profile">
+            <!-- 프로필 이미지 경로 수정 필요 -->
+            <img src="/img/admin.svg" alt="">
+            <h3>관리자</h3>
+            <p>mini7_team5@kt.aivle.com</p>
         </div>
-    </div>
-    <div class="section">
-        <div class="section-title">공유 메모</div>
-        <div class="section-content">
+
+        <!-- 정보 섹션 -->
+        <div class="info">
+            <p>만료일: <span>2024-12-31 (5일 남음)</span></p>
+            <p>PG: <span>미가입</span></p>
+            <p>도메인: <span>외부 도메인 사용 중</span></p>
+        </div>
+
+        <!-- 운영진 설정 섹션 -->
+        <div class="section">
+            <h4>운영진 설정</h4>
+            <div class="section-content">
+                <p>관리자들과 공유할 설정을 확인하세요.</p>
+            </div>
+        </div>
+
+        <!-- 메모 섹션 -->
+        <div class="memo">
             <p>관리자들과 공유할 메모를 남겨주세요.</p>
-        </div>
-    </div>
-    <div class="section">
-        <div class="section-title">도움말</div>
-        <div class="section-content">
-            <p>시스템 사용 가이드와 FAQ를 확인할 수 있습니다.</p>
+            <button>메모 추가</button>
         </div>
     </div>
 </div>
