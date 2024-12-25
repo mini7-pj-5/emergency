@@ -134,8 +134,7 @@ function showFloatingPanel(hospital) {
         <h4>${hospital.hospitalName}</h4>
         <p><strong>병원 정보:</strong> ${hospital.emergencyMedicalInstitutionType}</p>
         <p><strong>주소:</strong> ${hospital.address}</p>
-        <p><strong>전화 1:</strong> ${hospital.phoneNumber1 || 'N/A'}</p>
-        <p><strong>전화 3:</strong> ${hospital.phoneNumber3 || 'N/A'}</p>
+        <p><strong>전화:</strong> ${hospital.phoneNumber1 || 'N/A'} / ${hospital.phoneNumber3 || 'N/A'}</p>
         <p><strong>위도:</strong> ${hospital.latitude}</p>
         <p><strong>경도:</strong> ${hospital.longitude}</p>
         <p><strong>거리:</strong> ${hospital.distance} km</p>

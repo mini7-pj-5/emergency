@@ -9,11 +9,13 @@
 </head>
 <body>
 <!-- 병원 정보 컨테이너 -->
-<div class="hospital-table-container">
+<div class="hospital-table-container"
+     th:classappend="${hospitals == null || hospitals.isEmpty()} ? 'full-width' : ''">
     <h1 th:text="${message}">병원 추천 결과</h1>
     <p th:if="${hospitals != null}" th:text="'검색 반경: ' + ${searchedRadius} + ' km'">검색 반경: 10 km</p>
-    <p th:text="'예상 응급 등급: ' + ${predictedGrade}">예상 응급 등급: 3</p>
+    <p th:if="${hospitals != null}" th:text="'예상 응급 등급: ' + ${predictedGrade}">예상 응급 등급: 3</p>
 
+    <!-- 병원이 있으면 테이블을 표시 -->
     <table class="hospital-table" id="hospitalTable" th:if="${hospitals != null}">
         <thead>
         <tr>
@@ -25,7 +27,7 @@
             <td>
                 <div class="hospital-info">
                     <div class="hospital-name-distance">
-                        <span th:text="${hospital.hospitalName}"></span>
+                        <span class="hospital-name" th:text="${hospital.hospitalName}"></span>
                         <span th:text="'(' + ${hospital.distance} + ' km)'"></span>
                     </div>
                     <div class="hospital-details">
@@ -38,11 +40,16 @@
         </tbody>
     </table>
 
-    <p class="no-data-message" th:if="${hospitals == null}">추천된 병원이 없습니다.</p>
+    <!-- 병원이 없으면 안내 메시지를 표시 -->
+    <p class="no-data-message" th:if="${hospitals == null || hospitals.isEmpty()}">
+        집에서 요양을 보낼 것을 권고드립니다.
+    </p>
 </div>
 
 <!-- 지도 컨테이너 -->
-<div id="map" class="map-container"></div>
+<div id="map" class="map-container"
+     th:classappend="${hospitals == null || hospitals.isEmpty()} ? 'hidden' : ''">
+</div>
 
 <!-- 플로팅 정보 패널 -->
 <div id="floating-info-panel" class="floating-info-panel"></div>

@@ -9,23 +9,39 @@ body {
     min-height: 100vh;
 }
 
-/* 병원 정보 컨테이너 */
-.hospital-table-container {
-    width: 15%; /* 병원 정보: 화면의 30% */
-    max-width: 30%;
-    padding: 20px;
-    background-color: #fff;
-    border-right: 1px solid #ddd; /* 지도와 구분선 */
-    overflow-y: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.hospital-table-container .hospital-name-distance .hospital-name {
+    color: #007bff;
+    font-weight: bold;
+    font-size: 16px;
 }
 
-/* 지도 컨테이너 */
+.hospital-table-container {
+    width: 15%; /* 병원 정보: 기본 너비 */
+    max-width: 30%;
+    padding: 0;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
+}
+
+.hospital-table-container.full-width {
+    width: 100%; /* 병원이 없을 때 전체 화면 */
+    max-width: 100%;
+    border-right: none;
+}
+
 .map-container {
-    width: 85%; /* 지도: 화면의 70% */
-    height: 100vh; /* 전체 화면 높이 */
-    overflow: hidden; /* 초과 부분 숨김 */
-    position: relative; /* 플로팅 패널 배치를 위한 기준 */
+    width: 85%; /* 지도: 기본 너비 */
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    transition: opacity 0.3s ease;
+}
+
+.map-container.hidden {
+    display: none; /* 병원이 없을 때 지도 숨김 */
 }
 
 /* 병원 정보 테이블 */
@@ -37,7 +53,8 @@ body {
 
 .hospital-table th,
 .hospital-table td {
-    border: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
     padding: 10px;
     text-align: center;
     font-size: 14px;
@@ -47,10 +64,6 @@ body {
     background-color: #007bff;
     color: #fff;
     font-weight: bold;
-}
-
-.hospital-table tr:nth-child(even) {
-    background-color: #f2f2f2;
 }
 
 .hospital-table tr:hover {
@@ -111,8 +124,8 @@ p {
 .floating-info-panel {
     position: absolute;
     top: 2%; /* 상단에서 떨어진 거리 */
-    left: 17%; /* 좌측 메뉴의 우측 */
-    width: 10%;
+    left: 16%; /* 좌측 메뉴의 우측 */
+    width: 15%;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -125,14 +138,17 @@ p {
 
 .floating-info-panel h4 {
     margin: 0 0 10px;
-    font-size: 18px;
+    font-size: 22px;
     color: #007bff;
+    text-align: left;
 }
 
 .floating-info-panel p {
     margin: 5px 0;
     font-size: 14px;
     color: #333;
+    padding: 5px;
+    text-align: left;
 }
 
 /* 스크롤바 스타일 */
@@ -148,3 +164,4 @@ p {
 .hospital-table-container::-webkit-scrollbar-thumb:hover {
     background-color: #aaa;
 }
+
