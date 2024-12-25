@@ -254,24 +254,37 @@
         }
 
         /* 페이지네이션 스타일 */
-        .pagination a {
+        .pagination {
+            text-align: center; /* 페이지네이션을 중앙 정렬 */
+            margin-top: 20px; /* 상단 여백 추가 */
+        }
+
+        .pagination-button {
             display: inline-block;
             padding: 8px 16px;
             margin: 0 4px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
+            background-color: transparent; /* 배경색을 투명하게 설정 */
+            border: none; /* 테두리 제거 */
+            cursor: pointer; /* 커서를 포인터로 변경 */
+            transition: opacity 0.3s ease;
         }
 
-        .pagination a:hover {
-            background-color: #0056b3;
+        .pagination-button:hover {
+            opacity: 0.7; /* 마우스 오버 시 투명도 변경 */
         }
 
+        .pagination-icon {
+            width: 24px; /* 아이콘의 너비 설정 */
+            height: 24px; /* 아이콘의 높이 설정 */
+        }
+
+        /* 페이지 번호 텍스트 스타일 */
         .pagination span {
             display: inline-block;
             padding: 8px 16px;
             margin: 0 4px;
+            font-weight: bold;
+            color: #333;
         }
 
         /* 콘텐츠 래퍼 */
@@ -374,13 +387,15 @@
         <!-- 수정된 페이지네이션 -->
         <div class="pagination">
             <a th:if="${logList.hasPrevious()}"
-               th:href="@{/admin(page=${logList.number - 1}, search=${search})}">
-                Previous
+               th:href="@{/admin(page=${logList.number - 1}, search=${search})}"
+               class="pagination-button">
+                <img src="/img/leftButton.svg" alt="Previous" class="pagination-icon">
             </a>
             <span th:text="${logList.number + 1} + ' / ' + ${logList.totalPages}"></span>
             <a th:if="${logList.hasNext()}"
-               th:href="@{/admin(page=${logList.number + 1}, search=${search})}">
-                Next
+               th:href="@{/admin(page=${logList.number + 1}, search=${search})}"
+               class="pagination-button">
+                <img src="/img/rightButton.svg" alt="Next" class="pagination-icon">
             </a>
         </div>
 
