@@ -4,113 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f9fafc;
-        }
-        header {
-            background: #2c3e50;
-            color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .nav-buttons {
-            display: flex;
-            gap: 30px;
-        }
-        .nav-buttons a {
-            color: white;
-            text-decoration: none;
-        }
-        .admin-button {
-            background-color: red;
-            color: white;
-            text-decoration: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-        }
-        .board-container {
-            margin: 50px auto;
-            width: 80%;
-            max-width: 800px;
-        }
-        .board-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .board-header h2 {
-            margin: 0;
-        }
-        .search-container {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            width: 70%;
-        }
-        .search-container input[type="text"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 80%;
-        }
-        .search-container button {
-            padding: 10px 16px;
-            background: #28a745;
-            color: white;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-        }
-        .write-button {
-            padding: 10px 16px;
-            background: #007bff;
-            color: white;
-            border-radius: 4px;
-            text-decoration: none;
-        }
-        .board-item {
-            background: white;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .board-item h3 {
-            margin: 0;
-        }
-        .board-item p {
-            margin: 0;
-            color: #555;
-        }
-        .delete-status {
-            color: red;
-            font-size: 12px;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/header.css"> <!-- 헤더 전용 CSS -->
+    <link rel="stylesheet" href="/css/board.css">
 </head>
 <body>
-<header>
-    <div class="logo">Aivle School 7기</div>
-    <div class="nav-buttons">
-        <a href="/">Home</a>
-        <a href="/board">Board</a>
-        <a href="/qna">Q&A</a>
-    </div>
-    <a href="/admin" class="admin-button">ADMIN</a>
-</header>
+<div th:replace="fragments/header :: header"></div> <!-- 헤더 삽입 -->
 
 <div class="board-container">
     <div class="board-header">

@@ -1,0 +1,72 @@
+/* Body 스타일 */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9fafc;
+}
+
+/* 게시글 컨테이너 */
+.post-container {
+    margin: 50px auto;
+    width: 80%;
+    max-width: 800px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-container h2 {
+    margin-bottom: 10px;
+}
+
+.post-container p {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.post-container .content {
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+/* 첨부 파일 섹션 */
+.post-container .file-section {
+    margin-top: 20px;
+}
+
+/* 버튼 영역 */
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.button-container button {
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+/* 삭제 버튼 */
+.delete-button {
+    background: red;
+    color: white;
+}
+
+/* 뒤로 가기 버튼 */
+.back-button {
+    background: #007bff;
+    color: white;
+}
+
+/* 삭제 상태 표시 */
+.delete-status {
+    margin-top: 20px;
+    color: red;
+    font-size: 14px;
+    text-align: right;
+    display: none;
+}

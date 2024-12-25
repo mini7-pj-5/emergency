@@ -11,74 +11,13 @@ body {
     justify-content: flex-start; /* 위쪽에서 시작 */
     align-items: center; /* 가운데 정렬 */
     box-sizing: border-box;
-    position: relative;
+    position: relative; /* 아래 패딩 여백 유지 */
 }
 
-/* 헤더 스타일 */
-header {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    height: 50px; /* 고정된 높이 */
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    z-index: 2000; /* 다른 요소보다 위 */
-}
-
-/* 로고 스타일 */
-.logo {
-    font-size: 20px;
-    font-weight: bold;
-    margin-left: 20px;
-    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-}
-
-/* 네비게이션 버튼 */
-.nav-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center; /* 버튼을 가운데로 정렬 */
-    flex-grow: 1; /* nav-buttons가 남은 공간을 차지하도록 설정 */
-    margin-right: 60px; /* 왼쪽으로 더 이동 */
-    overflow: hidden; /* 메뉴가 넘칠 경우 숨김 */
-}
-
-.nav-buttons a {
-    color: white;
-    text-decoration: none;
-    font-size: 17px;
-    padding: 8px 12px;
-    transition: background-color 0.3s, color 0.3s;
-    font-weight: normal;
-}
-
-.nav-buttons a:hover,
-.nav-buttons a.active {
-    font-weight: bold;
-}
-
-/* 메뉴 버튼 */
-.menu-icon {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-/* ADMIN 버튼 */
-.admin-button {
-    margin-right: 20px;
-    background-color: red;
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
+/* 일반 요소들 */
+body * {
+    position: relative; /* 텍스트를 가상 요소 위로 올림 */
+    z-index: 2;
 }
 
 /* 폼 컨테이너 */
@@ -179,56 +118,17 @@ input[type="submit"].submit-disabled {
     display: none; /* 기본적으로 숨김 처리 */
 }
 
-/* 모바일 화면용 스타일 */
-@media (max-width: 768px) {
-    .menu-icon {
-        display: block; /* 모바일에서 메뉴 아이콘 표시 */
-        margin-right: 20px;
-    }
-
-    .admin-container {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 5px; /* ADMIN과 ☰ 버튼 간격 줄이기 */
-    }
-
-    .nav-buttons {
-        display: none; /* 기본적으로 숨김 */
+/* 반응형 조정 */
+@media (max-width: 1024px) {
+    .input-group {
         flex-direction: column;
-        align-items: flex-start; /* 버튼을 왼쪽 정렬 */
-        position: absolute;
-        top: 60px;
-        right: 0px;
-        background: rgba(0, 0, 0, 0.8);
-        padding: 10px;
-        border-radius: 8px;
-        width: auto;
-        z-index: 9999; /* 가장 위에 표시 */
-    }
-
-    .nav-buttons.show {
-        display: flex; /* 메뉴 클릭 시 표시 */
-    }
-
-    header {
-        position: fixed;
-        z-index: 1000; /* nav-buttons보다 낮게 설정 */
+        align-items: flex-start;
     }
 }
 
-/* 녹음 버튼 스타일 */
-.record-button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.record-button.recording {
-    background-color: #ff0000;
+@media (max-width: 768px) {
+    .form-container {
+        width: 95%;
+        padding: 30px;
+    }
 }

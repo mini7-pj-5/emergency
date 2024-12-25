@@ -1,169 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ</title>
-    <style>
-        /* 헤더 관련 스타일 */
-        header {
-            position: sticky;
-            top: 0;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 20px;
-            font-weight: bold;
-            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            align-items: center;
-            flex-grow: 1; /* 버튼들이 남는 공간을 채우도록 설정 */
-            margin-right: 60px;
-        }
-
-        .nav-buttons a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 8px 12px;
-            transition: color 0.3s ease;
-        }
-
-        .nav-buttons a:hover,
-        .nav-buttons a.active {
-            color: #007bff; /* 활성화 상태 색상 */
-        }
-
-        .admin-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .admin-button {
-            background-color: red;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            padding: 8px 12px;
-            border-radius: 4px;
-            margin-right: 10px;
-            transition: background-color 0.3s ease;
-        }
-
-        .admin-button:hover {
-            background-color: darkred;
-        }
-
-        .menu-icon {
-            font-size: 24px;
-            cursor: pointer;
-            display: none; /* 모바일에서만 보이도록 설정 */
-        }
-
-        /* FAQ 관련 스타일 */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: white;
-        }
-
-        .faq-container {
-            max-width: 80%;
-            margin: 20px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .faq-tabs {
-            display: flex;
-            justify-content: space-around;
-            border-bottom: 2px solid #007bff;
-            margin-bottom: 20px;
-        }
-
-        .faq-tab {
-            flex: 1;
-            text-align: center;
-            padding: 10px 0;
-            cursor: pointer;
-            font-size: 20px;
-            font-weight: bold;
-            color: #555;
-            border-bottom: 2px solid transparent;
-        }
-
-        .faq-tab.active {
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
-        }
-
-        .faq-item {
-            margin: 15px 0;
-            padding: 0 20px 15px 20px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .faq-item h3 {
-            margin: 0;
-            cursor: pointer;
-            color: #333;
-            font-size: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-item p {
-            margin: 13px 10px 0;
-            font-size: 17px;
-            color: #555;
-            display: none;
-        }
-
-        .faq-item.open p {
-            display: block;
-        }
-
-        /* 반응형 디자인 */
-        @media (max-width: 768px) {
-            .menu-icon {
-                display: block; /* 모바일에서 메뉴 아이콘 보이기 */
-            }
-
-            .nav-buttons {
-                display: none; /* 기본적으로 숨김 */
-                flex-direction: column;
-                align-items: flex-start;
-                background: rgba(0, 0, 0, 0.8);
-                padding: 10px;
-                border-radius: 5px;
-                position: absolute;
-                top: 60px;
-                right: 0;
-                z-index: 999;
-            }
-
-            .nav-buttons.show {
-                display: flex; /* 모바일 메뉴 활성화 */
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/header.css"> <!-- 헤더 전용 CSS -->
+    <link rel="stylesheet" href="/css/faq.css">
     <script>
         function toggleMenu() {
             const navButtons = document.querySelector('.nav-buttons');
@@ -211,22 +53,7 @@
     </script>
 </head>
 <body>
-<header>
-    <div class="logo">Aivle School 7차</div>
-    <div class="nav-buttons">
-        <a href="/">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#team">Team</a>
-        <a href="/board">Board</a>
-        <a href="#contact">Contact</a>
-        <a href="/faq">FAQ</a>
-    </div>
-    <div class="admin-container">
-        <a href="/admin" class="admin-button">ADMIN</a>
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
-    </div>
-</header>
+<div th:replace="fragments/header :: header"></div> <!-- 헤더 삽입 -->
 
 <!-- FAQ 컨테이너 -->
 <div class="faq-container">

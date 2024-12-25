@@ -4,101 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시글 상세보기</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f9fafc;
-        }
-        header {
-            background: #2c3e50;
-            color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .nav-buttons {
-            display: flex;
-            gap: 30px;
-        }
-        .nav-buttons a {
-            color: white;
-            text-decoration: none;
-        }
-        .admin-button {
-            background-color: red;
-            color: white;
-            text-decoration: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-        }
-        .post-container {
-            margin: 50px auto;
-            width: 80%;
-            max-width: 800px;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        .post-container h2 {
-            margin-bottom: 10px;
-        }
-        .post-container p {
-            margin-bottom: 20px;
-            color: #555;
-        }
-        .post-container .content {
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-        .post-container .file-section {
-            margin-top: 20px;
-        }
-        .button-container {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-        .button-container button {
-            padding: 10px 16px;
-            border-radius: 4px;
-            font-size: 14px;
-            border: none;
-            cursor: pointer;
-        }
-        .delete-button {
-            background: red;
-            color: white;
-        }
-        .back-button {
-            background: #007bff;
-            color: white;
-        }
-        .delete-status {
-            margin-top: 20px;
-            color: red;
-            font-size: 14px;
-            text-align: right;
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/header.css"> <!-- 헤더 전용 CSS -->
+    <link rel="stylesheet" href="/css/post.css">
 </head>
 <body>
-<header>
-    <div class="logo">Aivle School 7기</div>
-    <div class="nav-buttons">
-        <a href="/">Home</a>
-        <a href="/board">Board</a>
-        <a href="/qna">Q&A</a>
-    </div>
-    <a href="/admin" class="admin-button">ADMIN</a>
-</header>
+<div th:replace="fragments/header :: header"></div> <!-- 헤더 삽입 -->
 
 <div class="post-container">
     <h2 th:text="${post.hospitalName}">병원 이름</h2>

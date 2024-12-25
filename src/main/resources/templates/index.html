@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: head"></head>
-<body onload="setLocationAndInitializeMap()">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title ?: 'Default Title'}">Default Title</title>
+    <link rel="stylesheet" href="/css/main_styles.css">
+    <link rel="stylesheet" href="/css/header.css"> <!-- 헤더 전용 CSS -->
+    <script src="/js/form_validation.js" defer></script>
+    <script src="/js/location.js" defer></script>
+    <script src="/js/naver_map.js" defer></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ynqwzu7w93"></script>
+    <script src="/js/speech_recognition.js" defer></script>
+</head>
+<body class="default-page" onload="setLocationAndInitializeMap()">
 <div th:replace="fragments/header :: header"></div> <!-- 헤더 삽입 -->
 
 <div class="form-container">

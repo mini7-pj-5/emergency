@@ -1,98 +1,14 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>응급실 이용 경험 쓰기</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f9fafc;
-        }
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-        }
-        .logo {
-            font-size: 18px;
-            font-weight: bold;
-            margin-left: 20px;
-        }
-        .nav-buttons {
-            display: flex;
-            gap: 45px;
-            margin: 0 auto;
-        }
-        .nav-buttons a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-        .nav-buttons a:hover {
-            color: lightgray;
-        }
-        .admin-button {
-            background-color: red;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            padding: 8px 12px;
-            border: 1px solid white;
-            border-radius: 4px;
-            margin-right: 20px;
-        }
-        .form-container {
-            margin: 100px auto 50px;
-            width: 80%;
-            max-width: 600px;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        .form-container h2 {
-            margin-bottom: 20px;
-        }
-        .form-container input,
-        .form-container select,
-        .form-container textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .form-container input[type="file"] {
-            padding: 5px;
-        }
-        .form-container input[type="submit"] {
-            background: #007bff;
-            color: white;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/header.css"> <!-- 헤더 전용 CSS -->
+    <link rel="stylesheet" href="/css/board.css">
 </head>
 <body>
-<header>
-    <div class="logo">Aivle School 7기</div>
-    <div class="nav-buttons">
-        <a href="/">Home</a>
-        <a href="/board">Board</a>
-        <a href="/qna">Q&A</a>
-    </div>
-    <a href="/admin" class="admin-button">ADMIN</a>
-</header>
+<div th:replace="fragments/header :: header"></div> <!-- 헤더 삽입 -->
 
 <div class="form-container">
     <h2>응급실 이용 경험 쓰기</h2>

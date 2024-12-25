@@ -1,0 +1,83 @@
+/* Body 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+/* FAQ 컨테이너 */
+.faq-container {
+    max-width: 80%;
+    margin: 20px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* FAQ 탭 스타일 */
+.faq-tabs {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 2px solid #007bff;
+    margin-bottom: 20px;
+}
+
+.faq-tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    color: #555;
+    border-bottom: 2px solid transparent;
+}
+
+.faq-tab.active {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+}
+
+/* FAQ 아이템 스타일 */
+.faq-item {
+    margin: 15px 0;
+    padding: 0 20px 15px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.faq-item h3 {
+    margin: 0;
+    cursor: pointer;
+    color: #333;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-item p {
+    margin: 13px 10px 0;
+    font-size: 17px;
+    color: #555;
+    display: none;
+}
+
+.faq-item.open p {
+    display: block;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .faq-tabs {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .faq-tab {
+        flex: none;
+        padding: 8px 10px;
+    }
+}
