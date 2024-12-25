@@ -1,35 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emergency Input</title>
-    <link rel="stylesheet" href="/css/main_styles.css">
-    <script src="/js/form_validation.js" defer></script> <!-- Validation 스크립트 -->
-    <script src="/js/location.js" defer></script> <!-- 위치 정보 스크립트 -->
-    <script src="/js/naver_map.js" defer></script> <!-- 네이버 지도 스크립트 -->
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ynqwzu7w93"></script>
-    <script src="/js/speech_recognition.js" defer></script> <!-- 음성 인식 스크립트 -->
-</head>
-
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
 <body onload="setLocationAndInitializeMap()">
-
-<header>
-    <div class="logo">Aivle School 7차</div>
-    <div class="nav-buttons">
-        <a href="/">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#team">Team</a>
-        <a href="/board">Board</a>
-        <a href="#contact">Contact</a>
-        <a href="/faq">FAQ</a>
-    </div>
-    <div class="admin-container">
-        <a href="/admin" class="admin-button">ADMIN</a>
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
-    </div>
-</header>
+<div th:replace="fragments/header :: header"></div> <!-- 헤더 삽입 -->
 
 <div class="form-container">
     <h1>응급상황과 위치를 넣으세요.</h1>
@@ -66,6 +39,5 @@
         <input type="submit" id="submit-button" value="Submit" class="submit-enabled">
     </form>
 </div>
-
 </body>
 </html>

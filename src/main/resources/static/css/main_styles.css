@@ -10,27 +10,8 @@ body {
     flex-direction: column; /* 세로 정렬 */
     justify-content: flex-start; /* 위쪽에서 시작 */
     align-items: center; /* 가운데 정렬 */
-    /*padding: 100px 20px; !* 위쪽 100px, 아래쪽 20px 여백 *!*/
     box-sizing: border-box;
-    position: relative; /* 아래 패딩 여백 유지 */
-}
-
-/*body::before {*/
-/*    content: '';*/
-/*    position: fixed; !* fixed로 설정하여 스크롤에도 고정 *!*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    width: 100%;*/
-/*    height: 100%; !* 화면 전체에 적용 *!*/
-/*    background: rgba(0, 0, 0, 0.5); !* 어두운 레이어 *!*/
-/*    z-index: 1; !* 텍스트 아래에 레이어를 위치 *!*/
-/*    pointer-events: none; !* 클릭이 레이어에 막히지 않도록 설정 *!*/
-/*} // 화면 불투명한거 지울 때*/
-
-
-body * {
-    position: relative; /* 텍스트를 가상 요소 위로 올림 */
-    z-index: 2;
+    position: relative;
 }
 
 /* 헤더 스타일 */
@@ -46,9 +27,10 @@ header {
     justify-content: space-between;
     padding: 15px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+    z-index: 2000; /* 다른 요소보다 위 */
 }
 
+/* 로고 스타일 */
 .logo {
     font-size: 20px;
     font-weight: bold;
@@ -56,6 +38,7 @@ header {
     white-space: nowrap; /* 텍스트 줄바꿈 방지 */
 }
 
+/* 네비게이션 버튼 */
 .nav-buttons {
     display: flex;
     gap: 20px;
@@ -86,6 +69,7 @@ header {
     cursor: pointer;
 }
 
+/* ADMIN 버튼 */
 .admin-button {
     margin-right: 20px;
     background-color: red;
@@ -113,14 +97,12 @@ header {
 .form-container h1 {
     font-size: 20px;
     color: #333;
-    /*color: white;*/
     margin-bottom: 15px;
 }
 
 .form-container p {
     font-size: 14px;
     color: #555;
-    /*color: white;*/
     margin-bottom: 20px;
 }
 
@@ -146,7 +128,6 @@ textarea {
     align-items: baseline;
     gap: 10px;
     color: #333;
-    /*color: white;*/
     margin-bottom: 10px; /* 추가 여백 */
 }
 
@@ -196,16 +177,6 @@ input[type="submit"].submit-disabled {
     margin-top: 5px;
     margin-bottom: 10px;
     display: none; /* 기본적으로 숨김 처리 */
-}
-
-@media (max-width: 1024px) {
-    .nav-buttons {
-        gap: 10px; /* 간격을 줄임 */
-    }
-
-    .nav-buttons a {
-        font-size: 15px; /* 글자 크기도 줄임 */
-    }
 }
 
 /* 모바일 화면용 스타일 */

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title ?: 'Default Title'}">Default Title</title>
+    <link rel="stylesheet" href="/css/main_styles.css">
+    <script src="/js/form_validation.js" defer></script>
+    <script src="/js/location.js" defer></script>
+    <script src="/js/naver_map.js" defer></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ynqwzu7w93"></script>
+    <script src="/js/speech_recognition.js" defer></script>
+</head>
+<body th:fragment="header">
+<header>
+    <div class="logo">Aivle School 7차</div>
+    <div class="nav-buttons">
+        <a href="/">Home</a>
+        <a href="/board">Board</a>
+        <a href="/faq">FAQ</a>
+    </div>
+    <div class="admin-container">
+        <a href="/admin" class="admin-button">ADMIN</a>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    </div>
+</header>
+</body>
