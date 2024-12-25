@@ -7,10 +7,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,20 +24,32 @@ public class AdminController {
 
     // Admin 페이지
     @GetMapping("")
-    public ModelAndView index(Pageable pageable, HttpSession session) {
+    public String index(
+            @PageableDefault(page = 0, size = 10) Pageable pageable,
+            @RequestParam(value = "search", required = false) String search,
+            HttpSession session,
+            Model model) {
+
         Boolean isLoggedIn = (Boolean) session.getAttribute("isLoggedIn");
 
         if (isLoggedIn == null || !isLoggedIn) {
             // 인증되지 않은 사용자는 로그인 페이지로 리다이렉트
-            return new ModelAndView("redirect:/login");
+            return "redirect:/login";
         }
 
-        // 인증된 사용자만 admin 페이지 렌더링
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("admin/index");
-        Page<LogDto.ResponseList> logList = logService.getLogList(pageable);
-        mv.addObject("logList", logList);
+        Page<LogDto.ResponseList> logList;
+        if (search != null && !search.isEmpty()) {
+            logList = logService.searchLogs(search, pageable);
+        } else {
+            logList = logService.getLogList(pageable);
+        }
 
-        return mv;
+        model.addAttribute("logList", logList);
+        model.addAttribute("currentPage", logList.getNumber());
+        model.addAttribute("totalPages", logList.getTotalPages());
+        model.addAttribute("sort", pageable.getSort());
+        model.addAttribute("search", search);
+
+        return "admin/index";
     }
 }

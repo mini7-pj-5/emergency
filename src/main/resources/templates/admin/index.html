@@ -177,17 +177,12 @@
             overflow-y: auto; /* 세로 스크롤 활성화 */
             max-height: 400px; /* 세로 스크롤바가 나타나는 최대 높이 설정 */
         }
+
         thead {
             position: sticky; /* 헤더 고정 */
             top: 0; /* 고정 위치 지정 */
             background-color: #f4f4f4; /* 배경색 지정 */
             z-index: 2; /* 다른 요소 위로 올라오도록 설정 */
-        }
-        .search-container {
-            position: sticky; /* 검색창 고정 */
-            top: 0; /* 고정 위치 지정 */
-            z-index: 3; /* 검색창이 헤더보다 위로 올라오도록 설정 */
-            background-color: white; /* 배경색 */
         }
 
         /* 테이블 스타일 */
@@ -258,6 +253,27 @@
             height: 20px;
         }
 
+        /* 페이지네이션 스타일 */
+        .pagination a {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 0 4px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .pagination a:hover {
+            background-color: #0056b3;
+        }
+
+        .pagination span {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 0 4px;
+        }
+
         /* 콘텐츠 래퍼 */
         .content-wrapper {
             display: flex;
@@ -299,16 +315,19 @@
 
         <!-- 테이블 -->
         <div class="table-container">
-            <table border="1">
+            <table>
                 <thead>
                 <tr>
                     <th colspan="15">
-                        <div class="search-container">
-                            <input type="text" placeholder=" 검색" id="search-input">
-                            <button onclick="searchLogs()">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgl8493ezGhFTss4OaPLwZptcB_bygSybbKw&s" alt="Search Icon">
-                            </button>
-                        </div>
+                        <!-- 수정된 검색 폼: 서버 측 검색을 위해 form 태그로 변경 -->
+                        <form th:action="@{/admin}" method="get">
+                            <div class="search-container">
+                                <input type="text" placeholder=" 검색" name="search" th:value="${search}">
+                                <button type="submit">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgl8493ezGhFTss4OaPLwZptcB_bygSybbKw&s" alt="Search Icon">
+                                </button>
+                            </div>
+                        </form>
                     </th>
                 </tr>
                 <tr>
@@ -352,14 +371,19 @@
             </table>
         </div>
 
-        <!-- 페이지네이션 -->
-        <div>
-            <button th:if="${logList.hasPrevious()}"
-                    th:href="@{/admin(page=${logList.number - 1})}">Previous</button>
-            <span th:text="${logList.number + 1} + '/' + ${logList.totalPages}"></span>
-            <button th:if="${logList.hasNext()}"
-                    th:href="@{/admin(page=${logList.number + 1})}">Next</button>
+        <!-- 수정된 페이지네이션 -->
+        <div class="pagination">
+            <a th:if="${logList.hasPrevious()}"
+               th:href="@{/admin(page=${logList.number - 1}, search=${search})}">
+                Previous
+            </a>
+            <span th:text="${logList.number + 1} + ' / ' + ${logList.totalPages}"></span>
+            <a th:if="${logList.hasNext()}"
+               th:href="@{/admin(page=${logList.number + 1}, search=${search})}">
+                Next
+            </a>
         </div>
+
     </div>
 </div>
 
@@ -385,20 +409,5 @@
         </div>
     </div>
 </div>
-
-<script>
-    function searchLogs() {
-        const input = document.getElementById("search-input").value.toLowerCase();
-        const rows = document.querySelectorAll("table tbody tr");
-
-        rows.forEach(row => {
-            const cells = row.querySelectorAll("td");
-            const match = Array.from(cells).some(cell =>
-                cell.textContent.toLowerCase().includes(input)
-            );
-            row.style.display = match ? "" : "none";
-        });
-    }
-</script>
 </body>
 </html>

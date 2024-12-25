@@ -5,7 +5,6 @@ import com.aivle.mini7.dto.LogDto;
 import com.aivle.mini7.model.Log;
 import com.aivle.mini7.repository.LogRepository;
 import lombok.RequiredArgsConstructor;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +25,13 @@ public class LogService {
     @Transactional(readOnly = true)
     public Page<LogDto.ResponseList> getLogList(Pageable pageable) {
         Page<Log> logs = logRepository.findAll(pageable);
+        return logs.map(LogDto.ResponseList::of);
+    }
 
+    // 검색 기능을 위한 메서드 추가
+    @Transactional(readOnly = true)
+    public Page<LogDto.ResponseList> searchLogs(String search, Pageable pageable) {
+        Page<Log> logs = logRepository.findByInputTextContainingIgnoreCase(search, pageable);
         return logs.map(LogDto.ResponseList::of);
     }
 
@@ -76,10 +81,7 @@ public class LogService {
                     break;
             }
             count++;
-
         }
-
         logRepository.save(hospitalLog);
     }
-
 }
