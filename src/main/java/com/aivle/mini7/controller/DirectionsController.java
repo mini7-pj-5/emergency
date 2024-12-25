@@ -12,10 +12,10 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/api")
 public class DirectionsController {
 
-    @Value("${naver.client.id}")
+    @Value("${naver.map.id}")
     private String clientId;
 
-    @Value("${naver.client.secret}")
+    @Value("${naver.map.secret}")
     private String clientSecret;
 
     @GetMapping("/directions")
