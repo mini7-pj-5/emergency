@@ -375,7 +375,6 @@
         <li class="active"><img src="/img/dashboard.svg" alt="Dashboard"> <a href="#"> 대시보드</a></li>
         <li><img src="/img/magic.svg" alt="Design Mode"> <a href="#"> 디자인모드</a></li>
         <li><img src="/img/user.svg" alt="User Management"> <a href="#"> 사용자 관리</a></li>
-        <li><img src="/img/shopping.svg" alt="Shopping"> <a href="#"> 쇼핑</a></li>
         <li><img src="/img/reserve.svg" alt="Reservation"> <a href="#"> 예약</a></li>
         <li><img src="/img/content.svg" alt="Content Management"> <a href="#"> 컨텐츠 관리</a></li>
         <li><img src="/img/static.svg" alt="Statistics"> <a href="#"> 통계</a></li>
@@ -476,7 +475,6 @@
     <div class="right-sidebar">
         <!-- 프로필 섹션 -->
         <div class="profile">
-            <!-- 프로필 이미지 경로 수정 필요 -->
             <img src="/img/admin.svg" alt="">
             <h3>관리자</h3>
             <p>mini7_team5@kt.aivle.com</p>
@@ -500,9 +498,43 @@
         <!-- 메모 섹션 -->
         <div class="memo">
             <p>관리자들과 공유할 메모를 남겨주세요.</p>
-            <button>메모 추가</button>
+            <button id="addMemoBtn">메모 추가</button>
+            <!-- 메모 입력 폼 (초기에는 숨김) -->
+            <div id="memoForm" style="display: none;">
+                <textarea id="memoInput" placeholder="메모를 입력하세요..." rows="4" style="width: 100%;"></textarea>
+                <button id="saveMemoBtn">저장</button>
+            </div>
+            <!-- 메모 리스트 -->
+            <ul id="memoList">
+                <!-- 추가된 메모 항목들이 여기에 표시됩니다. -->
+            </ul>
         </div>
     </div>
 </div>
+
+<script>
+    // 메모 추가 버튼 클릭 시 동작
+    document.getElementById('addMemoBtn').addEventListener('click', function() {
+        document.getElementById('memoForm').style.display = 'block'; // 입력 폼 표시
+    });
+
+    // 메모 저장 버튼 클릭 시 동작
+    document.getElementById('saveMemoBtn').addEventListener('click', function() {
+        const memoInput = document.getElementById('memoInput').value; // 입력된 메모 가져오기
+
+        if (memoInput) {
+            // 메모 리스트에 추가
+            const li = document.createElement('li');
+            li.textContent = memoInput;
+            document.getElementById('memoList').appendChild(li);
+
+            // 입력 폼 초기화 후 숨기기
+            document.getElementById('memoInput').value = '';
+            document.getElementById('memoForm').style.display = 'none';
+        } else {
+            alert('메모를 입력해주세요.');
+        }
+    });
+</script>
 </body>
 </html>
