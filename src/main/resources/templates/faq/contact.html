@@ -1,24 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
+    <link rel="stylesheet" href="/css/header.css"> <!-- 헤더 전용 CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center; /* 가로 중앙 정렬 */
+            align-items: center; /* 세로 중앙 정렬 */
+        }
+
+        form {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 30px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center; /* 제목 중앙 정렬 */
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="email"],
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: none;
+            height: 120px;
+        }
+
+        button {
+            display: inline-block;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        p {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        p[style="color:green;"] {
+            color: #28a745;
+        }
+
+        p[style="color:red;"] {
+            color: #dc3545;
+        }
+    </style>
 </head>
 <body>
-<h1>Contact Us</h1>
-<form action="/send-email" method="post">
-    <label for="fromEmail">Your Email:</label>
-    <input type="email" id="fromEmail" name="fromEmail" required>
+<div th:replace="fragments/header :: header"></div> <!-- 헤더 삽입 -->
 
-    <label for="subject">Subject:</label>
-    <input type="text" id="subject" name="subject" required>
+<div class="form-container">
+    <form action="/send-email" method="post">
+        <h1>Contact Us</h1>
+        <label for="fromEmail">Your Email:</label>
+        <input type="email" id="fromEmail" name="fromEmail" required placeholder="이메일 주소를 입력해주세요">
 
-    <label for="body">Message:</label>
-    <textarea id="body" name="body" required></textarea>
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" required placeholder="제목을 입력해주세요">
 
-    <button type="submit">Send</button>
-</form>
+        <label for="body">Message:</label>
+        <textarea id="body" name="body" required placeholder="메시지 내용을 입력해주세요"></textarea>
+
+        <button type="submit">Send</button>
+    </form>
+</div>
 
 <div>
     <p th:if="${param.success}" style="color:green;">Your email has been sent successfully!</p>
