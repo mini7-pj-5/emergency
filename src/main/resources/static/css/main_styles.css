@@ -2,6 +2,12 @@ header {
     width: 100%;
 }
 
+textarea#request {
+    height: 300px; /* 요청한 높이로 설정 */
+    resize: none; /* 사용자가 크기 조절 못 하도록 설정 */
+    margin-bottom: 10px; /* 검색 병원 수와의 간격 줄이기 */
+}
+
 /* Body 스타일 */
 body {
     margin: 0;
@@ -9,44 +15,130 @@ body {
     background-image: url('https://i.pinimg.com/236x/a0/d0/e1/a0d0e120d1f4cc56c9dfa58d151bc7a7.jpg');
     background-size: cover;
     background-position: center;
-    min-height: 100vh; /* 전체 화면 높이 설정 */
+    min-height: 100vh;
     display: flex;
-    flex-direction: column; /* 세로 정렬 */
-    justify-content: flex-start; /* 위쪽에서 시작 */
-    align-items: center; /* 가운데 정렬 */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     box-sizing: border-box;
-    position: relative; /* 아래 패딩 여백 유지 */
+    position: relative;
 }
 
 /* 일반 요소들 */
 body * {
-    position: relative; /* 텍스트를 가상 요소 위로 올림 */
+    position: relative;
     z-index: 2;
 }
 
-/* 폼 컨테이너 */
-.form-container {
+/* 폼 컨테이너 - 가로 레이아웃 */
+.form-container-horizontal {
+    display: flex;
+    flex-direction: column;
     background: rgba(255, 255, 255, 0.95);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     width: 90%;
-    max-width: 450px;
-    text-align: center;
-    margin: 50px 0; /* 상단과 하단 여백 설정 */
-    flex-shrink: 0; /* 화면 크기가 작아져도 눌리지 않도록 */
+    max-width: 1200px;
+    margin: 50px auto;
 }
 
-.form-container h1 {
-    font-size: 20px;
-    color: #333;
+.horizontal-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    gap: 20px; /* 왼쪽과 오른쪽 열 간의 간격 */
+}
+
+/* 왼쪽 열 */
+.left-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 요소 간의 간격 좁힘 */
+}
+
+/* 오른쪽 열 */
+.right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* 요소 간의 간격 유지 */
+}
+
+#map-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#map {
+    width: 100%;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     margin-bottom: 15px;
 }
 
-.form-container p {
+/* 지도 아래 위도, 경도 한 줄로 배치 */
+.coordinates {
+    display: flex;
+    justify-content: space-between; /* 요소 사이 균형 맞춤 */
+    align-items: center;
+    width: 100%;
+    gap: 15px;
+}
+
+.coordinates .input-group {
+    flex: 1; /* 위도와 경도가 동일한 비율로 공간 차지 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.coordinates label {
+    font-size: 12px;
+    color: #333;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.coordinates input {
+    width: 100%; /* 부모 컨테이너에 맞춤 */
+    padding: 5px;
     font-size: 14px;
-    color: #555;
-    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* 검색 병원 수 */
+.search-hospital-container {
+    display: flex;
+    justify-content: space-between; /* 한 줄로 배치 */
+    align-items: center;
+    gap: 10px;
+    margin-top: -8.5px; /* 텍스트 박스와 간격 줄이기 */
+}
+
+.search-hospital-container label {
+    font-size: 14px;
+    color: #333;
+    flex: 1; /* 라벨이 차지할 비율 */
+    text-align: left;
+}
+
+.search-hospital-container input {
+    flex: 0 0 100px; /* 고정 너비 100px */
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
 }
 
 /* 텍스트 박스 및 입력 칸 */
@@ -66,30 +158,18 @@ textarea {
     resize: none;
 }
 
-.input-group {
+/* 제출 및 녹음 버튼 컨테이너 */
+.submit-container {
+    margin-top: 20px;
     display: flex;
-    align-items: baseline;
-    gap: 10px;
-    color: #333;
-    margin-bottom: 10px; /* 추가 여백 */
-}
-
-.input-group label {
-    flex: 1;
-    font-size: 14px;
-    white-space: nowrap;
-    text-align: left;
-}
-
-.input-group input[type="number"] {
-    flex: 0.3;
-    max-width: 80px;
-    text-align: center;
-}
-
-/* 제출 버튼 */
-input[type="submit"] {
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
     width: 100%;
+}
+
+.submit-container input[type="submit"] {
+    flex: 1; /* 남은 공간을 모두 차지 */
     padding: 12px;
     border: none;
     border-radius: 4px;
@@ -98,19 +178,26 @@ input[type="submit"] {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-top: 15px;
 }
 
-input[type="submit"]:hover {
+.submit-container input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-/* 비활성화 상태 스타일 */
-input[type="submit"].submit-disabled {
-    background-color: #d3d3d3;
-    color: #666;
-    cursor: not-allowed;
-    opacity: 0.7;
+.record-button {
+    flex: 0 0 120px; /* 고정 너비 120px */
+    padding: 12px 0;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.record-button.recording {
+    background-color: #ff0000;
 }
 
 /* 경고 메시지 스타일 */
@@ -119,20 +206,55 @@ input[type="submit"].submit-disabled {
     font-size: 12px;
     margin-top: 5px;
     margin-bottom: 10px;
-    display: none; /* 기본적으로 숨김 처리 */
+    display: none;
 }
 
 /* 반응형 조정 */
 @media (max-width: 1024px) {
-    .input-group {
+    .horizontal-form {
         flex-direction: column;
-        align-items: flex-start;
+    }
+
+    .left-column,
+    .right-column {
+        width: 100%;
+    }
+
+    #map {
+        height: 200px;
+    }
+
+    .coordinates {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .coordinates input {
+        width: 100%;
+    }
+
+    .submit-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .record-button {
+        margin-left: 0;
     }
 }
 
-@media (max-width: 768px) {
-    .form-container {
-        width: 95%;
-        padding: 30px;
-    }
+.form-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-header h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.form-header p {
+    font-size: 16px;
+    color: #555;
 }

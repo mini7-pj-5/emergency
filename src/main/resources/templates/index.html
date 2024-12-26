@@ -15,39 +15,51 @@
 <body class="default-page" onload="setLocationAndInitializeMap()">
 <div th:replace="fragments/header :: header"></div> <!-- 헤더 삽입 -->
 
-<div class="form-container">
-    <h1>응급상황과 위치를 넣으세요.</h1>
-    <p>Request your emergency situation and location details.</p>
+<!-- 폼 컨테이너 -->
+<div class="form-container-horizontal">
+    <!-- 중앙 정렬된 제목과 설명 -->
+    <div class="form-header">
+        <h1>응급상황과 위치를 넣으세요.</h1>
+        <p>Request your emergency situation and location details.</p>
+    </div>
+
+
     <form action="/recommend_hospital" method="application/x-www-form-urlencoded">
-        <div class="input-group">
-            <textarea id="request" name="request" rows="4" placeholder="Requests"></textarea>
-            <!-- 녹음 버튼 추가 -->
+        <!-- 가로 정렬된 폼 -->
+        <div class="horizontal-form">
+            <!-- 왼쪽 열 -->
+            <div class="left-column">
+                <div class="input-group">
+                    <textarea id="request" name="request" rows="4" placeholder="현재 응급상황을 알려주세요"></textarea>
+                </div>
+
+                <div class="input-group search-hospital-container">
+                    <label for="top_n">검색할 병원 수 (최대 3개):</label>
+                    <input type="number" id="top_n" name="top_n" value="3" min="1" max="3">
+                </div>
+            </div>
+
+            <!-- 오른쪽 열 -->
+            <div class="right-column">
+                <div id="map-container">
+                    <div id="map" style="width: 100%; height: 300px; border: 1px solid #ccc; border-radius: 4px;"></div>
+                    <div class="coordinates">
+                        <div class="input-group">
+                            <input type="text" id="latitude" name="latitude" placeholder="37.538435245262626">
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="longitude" name="longitude" placeholder="126.98982802695484">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 제출 및 녹음 버튼 -->
+        <div class="submit-container">
+            <input type="submit" id="submit-button" value="Submit" class="submit-enabled">
             <button type="button" id="recordButton" class="record-button">🎤 녹음</button>
         </div>
-        <p id="request-error" class="error-message" data-message="Request는 필수 입력값입니다."></p>
-
-        <div class="input-group">
-            <label for="latitude">Latitude:</label>
-            <input type="text" id="latitude" name="latitude" placeholder="Latitude">
-        </div>
-        <p id="latitude-error" class="error-message" data-message="위도는 필수 입력값입니다."></p>
-
-        <div class="input-group">
-            <label for="longitude">Longitude:</label>
-            <input type="text" id="longitude" name="longitude" placeholder="Longitude">
-        </div>
-        <p id="longitude-error" class="error-message" data-message="경도는 필수 입력값입니다."></p>
-
-        <div class="input-group">
-            <label for="top_n">검색할 병원 수 (최대 3개):</label>
-            <input type="number" id="top_n" name="top_n" value="3" min="1" max="3">
-        </div>
-        <p id="top_n-error" class="error-message" data-message="검색 병원 수는 1에서 3 사이여야 합니다."></p>
-
-        <!-- 네이버 지도 표시 -->
-        <div id="map" style="width: 100%; height: 300px; margin-top: 20px; border: 1px solid #ccc;"></div>
-
-        <input type="submit" id="submit-button" value="Submit" class="submit-enabled">
     </form>
 </div>
 </body>
