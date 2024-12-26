@@ -2,7 +2,6 @@
 header {
     position: sticky;
     top: 0;
-    width: 100%;
     height: 50px; /* 고정된 높이 */
     background: rgba(0, 0, 0, 0.8);
     color: white;
