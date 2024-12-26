@@ -233,17 +233,21 @@ textarea {
     }
 
     .coordinates {
-        flex-direction: column;
+        flex-direction: row; /* 모바일에서도 한 줄 유지 */
         gap: 10px;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
     }
 
-    .coordinates input {
+    .coordinates .input-group {
+        flex: 1; /* 위도와 경도가 동일한 비율 유지 */
         width: 100%;
     }
 
     .submit-container {
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: row; /* 모바일에서도 한 줄 유지 */
+        gap: 15px;
     }
 
     .record-button {
