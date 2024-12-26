@@ -14,13 +14,13 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
 
     recognition.onstart = () => {
         isRecording = true;
-        recordButton.textContent = '🎤 녹음 중...';
+        recordButton.innerHTML = '<img src="/img/recode_b.svg" alt="녹음 중..." style="width: 24px; height: 24px;">';
         recordButton.classList.add('recording');
     };
 
     recognition.onend = () => {
         isRecording = false;
-        recordButton.textContent = '🎤 녹음';
+        recordButton.innerHTML = '<img src="/img/recode_w.svg" alt="녹음..." style="width: 24px; height: 24px;">';
         recordButton.classList.remove('recording');
         clearTimeout(endTimeout);
     };
