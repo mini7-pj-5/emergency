@@ -21,12 +21,12 @@ public class FileController {
     private final Path fileStorageLocation = Paths.get("uploads").toAbsolutePath().normalize();
 
     /**
-     * 첨부 파일 다운로드
-     * @param fileName 다운로드할 파일 이름
+     * 첨부 파일 표시 또는 다운로드
+     * @param fileName 표시할 파일 이름
      * @return 파일 리소스
      */
     @GetMapping("/files/{fileName}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
+    public ResponseEntity<Resource> serveFile(@PathVariable String fileName) {
         try {
             Path filePath = fileStorageLocation.resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
@@ -37,6 +37,14 @@ public class FileController {
                     contentType = "application/octet-stream";
                 }
 
+                // 이미지 파일은 브라우저에서 바로 표시
+                if (contentType.startsWith("image/")) {
+                    return ResponseEntity.ok()
+                            .contentType(MediaType.parseMediaType(contentType))
+                            .body(resource);
+                }
+
+                // 그 외 파일은 다운로드
                 return ResponseEntity.ok()
                         .contentType(MediaType.parseMediaType(contentType))
                         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
@@ -51,3 +59,4 @@ public class FileController {
         }
     }
 }
+

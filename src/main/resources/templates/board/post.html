@@ -16,11 +16,17 @@
     <p><strong>내용:</strong></p>
     <p class="content" th:text="${post.content}">게시글 내용</p>
 
-    <!-- 첨부 파일 -->
+    <!-- 첨부 파일 섹션 -->
     <div class="file-section" th:if="${post.fileName != null}">
-        <p><strong>첨부 파일:</strong>
-            <a th:href="@{'/files/' + ${post.fileName}}" th:text="${post.fileName}" download></a>
-        </p>
+        <p><strong>첨부 파일:</strong></p>
+        <div>
+            <a th:if="${#strings.endsWith(post.fileName, '.jpg') or #strings.endsWith(post.fileName, '.jpeg') or #strings.endsWith(post.fileName, '.png') or #strings.endsWith(post.fileName, '.gif')}"
+               th:href="@{'/files/' + ${post.fileName}}" target="_blank">
+                <img th:src="@{'/files/' + ${post.fileName}}" alt="첨부 이미지" style="max-width: 300px; max-height: 300px;"/>
+            </a>
+            <a th:unless="${#strings.endsWith(post.fileName, '.jpg') or #strings.endsWith(post.fileName, '.jpeg') or #strings.endsWith(post.fileName, '.png') or #strings.endsWith(post.fileName, '.gif')}"
+               th:href="@{'/files/' + ${post.fileName}}" th:text="${post.fileName}" download></a>
+        </div>
     </div>
 
     <!-- 버튼 영역 -->
