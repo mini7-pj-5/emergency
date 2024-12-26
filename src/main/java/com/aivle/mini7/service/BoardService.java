@@ -5,6 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,14 +18,13 @@ import java.util.stream.Collectors;
 public class BoardService {
 
     private final List<BoardPostResponse> posts = new ArrayList<>();
-    private Long nextId = 1L; // ID 자동 증가 변수
+    private Long nextId = 1L;
+    private final Path fileStorageLocation = Paths.get("uploads").toAbsolutePath().normalize();
 
-    // 게시글 목록 반환
     public List<BoardPostResponse> getAllPosts() {
         return posts;
     }
 
-    // 게시글 검색
     public List<BoardPostResponse> searchPostsByTitleOrHospital(String keyword) {
         return posts.stream()
                 .filter(post -> post.getHospitalName().contains(keyword)
@@ -29,16 +32,32 @@ public class BoardService {
                 .collect(Collectors.toList());
     }
 
-    // 게시글 저장
     public void savePost(String hospitalName, String category, String content, MultipartFile file) {
+        String fileName = null;
+
+        if (file != null && !file.isEmpty()) {
+            try {
+                File uploadDir = new File(fileStorageLocation.toString());
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdirs();
+                }
+                Path targetLocation = fileStorageLocation.resolve(file.getOriginalFilename());
+                file.transferTo(targetLocation);
+                fileName = file.getOriginalFilename();
+            } catch (IOException ex) {
+                throw new RuntimeException("파일 저장에 실패했습니다: " + file.getOriginalFilename(), ex);
+            }
+        }
+
         BoardPostResponse post = new BoardPostResponse(
-                nextId++, // 자동 증가 ID 할당
+                nextId++,
                 hospitalName,
                 category,
                 content,
-                (file != null) ? file.getOriginalFilename() : null,
-                false // 초기값: 삭제 요청 상태 아님
+                fileName,
+                false
         );
+
         posts.add(post);
         log.info("Post saved: {}", post);
     }
@@ -50,7 +69,6 @@ public class BoardService {
                 .orElse(null);
     }
 
-    // 게시글 삭제 요청
     public void requestDelete(Long id) {
         posts.stream()
                 .filter(p -> p.getId().equals(id))
